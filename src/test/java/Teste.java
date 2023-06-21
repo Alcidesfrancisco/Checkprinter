@@ -1,9 +1,3 @@
-import checkPrinter.business.Printer;
-import checkPrinter.persistence.EntityDao;
-import checkPrinter.persistence.PrinterDao;
-
-
-
 public class Teste {
 
 
