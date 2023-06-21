@@ -421,3 +421,5 @@
 150.161.80.244 - - [21/Jun/2023:12:50:17 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8086-exec-10 3
 127.0.0.1 - - [21/Jun/2023:12:53:34 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 36096 http-bio-8086-exec-8 11087
 127.0.0.1 - - [21/Jun/2023:12:53:34 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8086-exec-8 3
+127.0.0.1 - - [21/Jun/2023:13:29:32 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 36092 http-bio-8086-exec-1 10980
+127.0.0.1 - - [21/Jun/2023:13:29:33 -0300] "GET /CheckPrinter/img/printerIcon.ico HTTP/1.1" 200 5694 http-bio-8086-exec-3 16
