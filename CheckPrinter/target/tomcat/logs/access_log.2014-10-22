@@ -1,0 +1,4 @@
+127.0.0.1 - - [22/Oct/2014:17:32:40 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 11962 http-bio-8080-exec-1 925
+127.0.0.1 - - [22/Oct/2014:17:32:41 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-3 72
+127.0.0.1 - - [22/Oct/2014:17:32:43 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+127.0.0.1 - - [22/Oct/2014:17:32:43 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0

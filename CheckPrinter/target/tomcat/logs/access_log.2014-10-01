@@ -1,0 +1,8 @@
+127.0.0.1 - - [01/Oct/2014:16:41:56 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13368 http-bio-8080-exec-1 146307
+127.0.0.1 - - [01/Oct/2014:16:41:56 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 200 5108 http-bio-8080-exec-3 69
+127.0.0.1 - - [01/Oct/2014:16:41:56 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+127.0.0.1 - - [01/Oct/2014:16:41:56 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [01/Oct/2014:17:11:54 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 11879 http-bio-8080-exec-7 22
+0:0:0:0:0:0:0:1 - - [01/Oct/2014:17:12:11 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 11877 http-bio-8080-exec-9 18
+0:0:0:0:0:0:0:1 - - [01/Oct/2014:17:58:15 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12878 http-bio-8080-exec-6 268986
+0:0:0:0:0:0:0:1 - - [01/Oct/2014:17:58:17 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12880 http-bio-8080-exec-7 269850

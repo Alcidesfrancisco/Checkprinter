@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:13:37:07 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13346 http-bio-8080-exec-1 149871
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:13:37:08 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 304 - http-bio-8080-exec-3 20
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:13:37:08 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-5 2
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:13:37:08 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-6 0
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:13:37:08 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:14:01:30 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13256 http-bio-8080-exec-9 145003
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:14:01:30 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-9 2
+93.174.93.51 - - [24/Oct/2014:15:22:29 -0300] "GET /hello/check.txt HTTP/1.1" 404 - http-bio-8080-exec-3 0
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13258 http-bio-8080-exec-6 149573
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-2 16
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/css/bootstrap.min.css HTTP/1.1" 304 - http-bio-8080-exec-6 388
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/lib/jquery.min.js HTTP/1.1" 304 - http-bio-8080-exec-8 359
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 304 - http-bio-8080-exec-9 74
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js HTTP/1.1" 304 - http-bio-8080-exec-10 217
+0:0:0:0:0:0:0:1 - - [24/Oct/2014:15:43:42 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 - http-bio-8080-exec-10 65

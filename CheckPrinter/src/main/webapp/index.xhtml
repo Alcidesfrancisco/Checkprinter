@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="refresh" content="360" />
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    	
+    	<link rel="icon" href="/CheckPrinter/img/printerIcon.ico" type="image/x-icon" />
+    	
+		<title>CheckPrinter 1.0</title>
+	</h:head>
+	<body>
+		<center>
+		<div class="page-header">
+			<h1>Monitoramento das Impressoras corporativas do CAV 
+			</h1>
+<!-- 			http://150.161.81.11/webglue/webui/nodedata/Settings/Device/Maintenance/ConfigMenu/?depth=10&fromReport=true
+ -->		</div>
+			<h:form class="panel-body" style="min-height: 550px">
+			<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+			
+				
+<!-- 				#{index.loadFile()} -->
+			
+			
+				<h:dataTable value="#{index.printers}" var="printer"
+							 styleClass="table table-bordered table-condensed table-hover table-striped "
+							 >
+					<h:column pt:style="width: 25%">
+						<f:facet name="header">
+							Impressora
+						</f:facet>
+						<span class="#{printer.cssName}" >#{printer.name.replaceAll('_',' ')} - <a href="#{printer.url}" target="_blank">#{printer.url}</a> - #{printer.status}
+						<br />
+						#{printer.marca} &nbsp;  #{printer.modelo} - <span class="badge badge-pill badge-dark" title="Serial da impressora">#{printer.serial}</span></span>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Toner
+						</f:facet>
+						<div class="progress">
+						  <div class="#{printer.cssNivel}" role="progressbar" aria-valuenow="#{printer.nivelToner}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelToner}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner">
+						    #{index.nivelTonerToString(printer.nivelToner)}
+						  </div>
+						  
+						</div>
+						<span class="badge badge-dark" title="Cor do toner">#{printer.corToner}</span>
+						<span class="badge badge-primary" title="Páginas Restantes">#{printer.pagRestantesToner}</span>
+						<span class="badge badge-pill badge-dark" title="Serial do Toner">#{printer.serialToner}</span>
+						<span class="#{printer.cssStatusToner}" title="Status do toner">#{printer.statusToner}</span>
+						
+						<h:panelGrid width="100%" rendered="#{printer.modelo == 'CX725'}">
+						#{index.printerConverter(printer)}
+							<div class="progress">
+							  <div class="#{index.cx.cssNivelTonerCyan}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerCyan}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerCyan}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Cyan">
+							    #{index.cx.nivelTonerCyan}%
+							  </div>
+						  
+						  </div>
+						<span class="badge badge-dark" style="background-color: #05adec">#{index.cx.corTonerCyan}</span>
+						<span class="badge badge-primary" title="Páginas Restantes">#{index.cx.pagRestantesTonerCyan}</span>
+						<span class="badge badge-pill badge-dark">#{index.cx.serialTonerCyan}</span>
+						<span class="#{index.cx.cssStatusTonerCyan}">#{index.cx.statusTonerCyan}</span>
+						
+						<div class="progress">
+							  <div class="#{index.cx.cssNiveltonerMagenta}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerMagenta}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerMagenta}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Magenta">
+							    #{index.cx.nivelTonerMagenta}%
+							  </div>
+						  
+						  </div>
+						<span class="badge badge-dark" style="background-color: #eb008b">#{index.cx.corTonerMagenta}</span>
+						<span class="badge badge-primary" title="Páginas Restantes">#{index.cx.pagRestantesTonerMagenta}</span>
+						<span class="badge badge-pill badge-dark">#{index.cx.serialTonerMagenta}</span>
+						<span class="#{index.cx.cssStatusTonerMagenta}">#{index.cx.statusTonerMagenta}</span>
+						
+						
+						
+						<div class="progress">
+							  <div class="#{index.cx.cssNiveltonerYellow}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerYellow}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerYellow}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Yellow">
+							    #{index.cx.nivelTonerYellow}%
+							  </div>
+						  
+						  </div>
+						<span class="badge badge-dark" style="background-color: #fedd19">#{index.cx.corTonerYellow}</span>
+						<span class="badge badge-primary" title="Páginas Restantes">#{index.cx.pagRestantesTonerYellow}</span>
+						<span class="badge badge-pill badge-dark">#{index.cx.serialTonerYellow}</span>
+						<span class="#{index.cx.cssStatusTonerYellow}">#{index.cx.statusTonerYellow}</span>
+						</h:panelGrid>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Unidade de imagem
+						</f:facet>
+						<div class="progress">
+						  <div class="#{printer.cssUnidade}" role="progressbar" aria-valuenow="#{printer.nivelUnidade}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelUnidade}%;">
+						    #{printer.nivelUnidade}%
+						  </div>
+						  
+						 </div>
+						 <span class="badge badge-dark">#{printer.corUnidade}</span>
+						<span class="badge badge-primary">#{printer.pagRestantesUnidade}</span>
+						<span class="badge badge-pill badge-dark">#{printer.serialUnidade}</span>
+						<span class="#{printer.cssStatusUnidade}">#{printer.statusUnidade}</span>
+				
+						  
+						  <h:panelGrid width="100%" rendered="#{printer.modelo == 'CX725'}">
+						  #{index.printerConverter(printer)}
+						  
+						   <div class="progress">
+							  <div class="#{index.cx.cssUnidadeCMY}" role="progressbar" aria-valuenow="#{index.cx.nivelUnidadeCMY}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelUnidadeCMY}%;">
+							    #{index.cx.nivelUnidadeCMY}%
+							  </div>
+						    </div>
+						  
+						   <span class="badge badge-info" style="background-color: orange">#{index.cx.corUnidadeCMY}</span>
+						<span class="badge badge-primary">#{index.cx.pagRestantesUnidadeCMY}</span>
+						<span class="badge badge-pill badge-dark">#{index.cx.serialUnidadeCMY}</span>
+						<span class="#{printer.cssStatusUnidade}">#{index.cx.statusUnidadeCMY}</span>
+						</h:panelGrid>
+				
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Kit manutenção
+						</f:facet>
+						<div class="progress">
+						  <div class="#{printer.cssKit}" role="progressbar" aria-valuenow="#{printer.nivelKit}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelKit}%;">
+						    #{printer.nivelKit}%
+						  </div>
+						</div>
+						<span class="badge badge-primary">#{printer.pagRestantesKit}</span>
+						<span class="badge badge-pill badge-dark">#{printer.serialKit}</span>
+						<span class="#{printer.cssStatusKit}">#{printer.statuskit}</span>
+												
+					</h:column>
+					
+				</h:dataTable>
+			</h:form>	
+		</center>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Solicitar Suprimentos</h4>
+		      </div>
+		      <div class="modal-body">
+		        Confirme 
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		        <h:form>
+		        	<h:commandLink action="#{index.enviarEmail()}" data-dismiss="modal" styleClass="btn btn-primary">Confirmar</h:commandLink>
+		        </h:form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="panel-footer">
+			<center>
+				Desenvolvido pela Equipe NATI/CAV-UFPE
+				<br></br>
+				Email - nati.cav.ufpe@gmail.com
+				<br></br>
+				Fone: (81)2126-8152
+			</center>
+		</div>
+</body>
+
+</html>

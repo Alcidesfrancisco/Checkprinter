@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:26:53 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 14752 http-bio-8080-exec-1 92603
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:26:53 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-3 72
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:26:53 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:26:53 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:31:27 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 14664 http-bio-8080-exec-1 89321
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:14:31:27 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-3 34
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:16:06:27 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 14664 http-bio-8080-exec-5 92246
+0:0:0:0:0:0:0:1 - - [24/Nov/2014:16:06:28 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-7 192

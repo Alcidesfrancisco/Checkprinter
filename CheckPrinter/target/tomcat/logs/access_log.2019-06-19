@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:26:50 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12252 http-bio-8085-exec-1 52746
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:26:51 -0300] "GET /CheckPrinter/faces/javax.faces.resource/theme.css?ln=primefaces-aristo HTTP/1.1" 200 29234 http-bio-8085-exec-3 22
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:29:38 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12426 http-bio-8085-exec-5 24589
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:29:38 -0300] "GET /CheckPrinter/img/printerIcon.ico HTTP/1.1" 200 5694 http-bio-8085-exec-7 2
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:33:40 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 3238 http-bio-8085-exec-1 2982
+0:0:0:0:0:0:0:1 - - [19/Jun/2019:16:33:41 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8085-exec-2 0

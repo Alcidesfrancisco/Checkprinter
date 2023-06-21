@@ -1,0 +1,11 @@
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:03:39 -0300] "GET /CheckPrinter HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:03:39 -0300] "GET /CheckPrinter/ HTTP/1.1" 404 977 http-bio-8080-exec-3 11
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:03:39 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:03:57 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-5 803
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:07:47 -0300] "GET /CheckPrinter/index.xhtml HTTP/1.1" 200 734 http-bio-8080-exec-7 4
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:11:20 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-1 300
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:11:23 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-2 9
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:11:26 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-3 14
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:11:27 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-4 14
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:14:51 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-1 298
+0:0:0:0:0:0:0:1 - - [23/Sep/2014:21:21:13 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 500 7137 http-bio-8080-exec-1 292

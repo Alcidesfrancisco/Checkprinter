@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [28/Sep/2014:20:39:20 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12289 http-bio-8080-exec-1 59034
+0:0:0:0:0:0:0:1 - - [28/Sep/2014:20:39:20 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 304 - http-bio-8080-exec-3 94

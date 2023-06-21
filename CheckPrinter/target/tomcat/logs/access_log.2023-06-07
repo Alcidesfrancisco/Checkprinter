@@ -1,0 +1,6 @@
+127.0.0.1 - - [07/Jun/2023:10:48:33 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 36396 http-bio-8086-exec-1 424701
+127.0.0.1 - - [07/Jun/2023:10:48:35 -0300] "GET /CheckPrinter/faces/javax.faces.resource/theme.css?ln=primefaces-aristo HTTP/1.1" 200 25184 http-bio-8086-exec-2 134
+127.0.0.1 - - [07/Jun/2023:10:48:35 -0300] "GET /CheckPrinter/lib/personal.css HTTP/1.1" 200 1207 http-bio-8086-exec-3 150
+127.0.0.1 - - [07/Jun/2023:10:49:10 -0300] "GET /CheckPrinter/img/printerIcon.ico HTTP/1.1" 200 5694 http-bio-8086-exec-6 31
+127.0.0.1 - - [07/Jun/2023:11:21:34 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 28324 http-bio-8086-exec-2 721342
+127.0.0.1 - - [07/Jun/2023:11:21:46 -0300] "GET /CheckPrinter/img/printerIcon.ico HTTP/1.1" 200 5694 http-bio-8086-exec-3 979

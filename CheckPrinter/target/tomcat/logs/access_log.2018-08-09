@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 15258 http-bio-9999-exec-1 32140
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 200 5108 http-bio-9999-exec-7 29
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/lib/jquery.min.js HTTP/1.1" 200 96381 http-bio-9999-exec-5 31
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js HTTP/1.1" 200 29110 http-bio-9999-exec-6 31
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/css/bootstrap.min.css HTTP/1.1" 200 99961 http-bio-9999-exec-4 57
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 200 40230 http-bio-9999-exec-3 50
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 200 23320 http-bio-9999-exec-3 2
+0:0:0:0:0:0:0:1 - - [09/Aug/2018:13:24:01 -0300] "GET /CheckPrinter/img/printerIcon.ico HTTP/1.1" 200 5694 http-bio-9999-exec-3 1

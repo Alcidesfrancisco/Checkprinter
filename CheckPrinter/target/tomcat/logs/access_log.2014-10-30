@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:14:08:27 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13532 http-bio-8080-exec-1 86127
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:14:08:27 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-3 34
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:14:08:27 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:14:08:28 -0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:35 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 13446 http-bio-8080-exec-7 90007
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:36 -0300] "GET /CheckPrinter/lib/jquery.min.js HTTP/1.1" 304 - http-bio-8080-exec-10 306
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:36 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/css/bootstrap.min.css HTTP/1.1" 304 - http-bio-8080-exec-9 339
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:37 -0300] "GET /CheckPrinter/img/request.png HTTP/1.1" 304 - http-bio-8080-exec-1 71
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:37 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-3 127
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:37 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/js/bootstrap.min.js HTTP/1.1" 304 - http-bio-8080-exec-2 243
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:15:56:37 -0300] "GET /CheckPrinter/lib/bootstrap-3.1.1-dist/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 304 - http-bio-8080-exec-2 89
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:19:58:07 -0300] "GET /CheckPrinter/faces/index.xhtml HTTP/1.1" 200 12650 http-bio-8080-exec-5 280378
+0:0:0:0:0:0:0:1 - - [30/Oct/2014:19:58:09 -0300] "GET /CheckPrinter/faces/javax.faces.resource/jsf.js?ln=javax.faces HTTP/1.1" 304 - http-bio-8080-exec-5 643
