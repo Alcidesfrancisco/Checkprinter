@@ -93,8 +93,13 @@ public class Index{
 			}
 			fileReader.close();
 			reader.close();
+			//espera 2seg para dar tempo preencher a view
 			TimeUnit.SECONDS.sleep(2);
+			
+			//organizar por nive de toner mais baixo
 			Collections.sort(printers);
+			
+			//grava printers no Json
 			JsonHandle jh = new JsonHandle();
 			jh.EscreverJsonPrinters(printers);
 			for (Printer p : printers) {
@@ -113,12 +118,12 @@ public class Index{
 		try {
 			if(printer.getNivelToner() <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
-						+ "Modelo: " + printer.getMarca() + " " + printer.getModelo() + "\n"
-						+ "Serial: " + printer.getSerial() + "\n"
-						+ "IP: " + printer.getUrl() + "\n"
-						+ "Nivel do Toner: " + printer.getNivelToner() + "%\n"
-						+ "Serial do Toner: " + printer.getSerialToner() + "\n"
-						+ "Páginas restantes: " + printer.getPagRestantesToner() + "\n";
+									+ "Modelo: " + printer.getMarca() + " " + printer.getModelo() + "\n"
+									+ "Serial: " + printer.getSerial() + "\n"
+									+ "IP: " + printer.getUrl() + "\n"
+									+ "NÃ­vel do Toner: " + printer.getNivelToner() + "%\n"
+									+ "Serial do Toner: " + printer.getSerialToner() + "\n"
+									+ "PÃ¡ginas restantes: " + printer.getPagRestantesToner() + "\n";
 				
 				
 				zap.enviaNotificacao(mensagem);
@@ -143,7 +148,7 @@ public class Index{
 			cx =  cx725;
 		}
 	}
-	//TODO localizar JS de estatísticas : http://150.161.80.19/#/Settings/Reports/ReportDeviceGroup
+	//TODO localizar JS de estatï¿½sticas : http://150.161.80.19/#/Settings/Reports/ReportDeviceGroup
 
 
 }

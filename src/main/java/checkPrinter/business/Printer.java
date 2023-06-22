@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 /*@Entity
 @Table(name="PRI_PRINTER")*/
-public abstract class Printer implements Comparable<Printer>{
+public class Printer implements Comparable<Printer>{
 
 	private Integer id;
 	private String name;
