@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -32,23 +36,68 @@ public class JsonHandle {
 		JsonHandle jh = new JsonHandle();
 		try {
 			jh.EscreverJsonPrinters(jh.carregarTXT());
-			jh.carregaJson();
+			jh.carregaGson();
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
+	public void carregaGson() throws IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		Gson gson = new Gson();
+		TypeToken tt = new TypeToken<List<Printer>>() {
+	    };
+		File file = new File(System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json");
+		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
+		BufferedReader reader = new BufferedReader(fileReader);
+		String json = reader.readLine();
 		
-		List<JSONObject> jList = new ArrayList<>();
-
+		 
+		
+		System.out.println(new JsonParser().parse(json));
+		JsonElement je = gson.toJsonTree(json);
+		System.out.println(je);
+		
+		    
+		String str = "[\n"
+	            + "  {\n"
+	            + "    \"name\": \"Guilherme Biff Zarelli\",\n"
+	            + "    \"marca\":\"M\",\n"
+	            + "    \"serial\": 26\n"
+	            + "  },\n"
+	            + "    {\n"
+	            + "    \"name\": \"Joao Silveira\",\n"
+	            + "    \"marca\":\"M\",\n"
+	            + "    \"serial\": 45\n"
+	            + "  },\n"
+	            + "    {\n"
+	            + "    \"name\": \"Maria Oliveira\",\n"
+	            + "    \"marca\":\"F\",\n"
+	            + "    \"serial\": 22\n"
+	            + "  }\n"
+	            + "]";
+		 
+		 //Define o TypeToken para a conversão string->objeto
+		    
+		 
+		    //Biblioteca Gson: https://github.com/google/gson
+		    
+		    //Conversao json para List<Usuario>
+		    List<Printer> fromJson = gson.fromJson(je.getAsString(), tt.getType());
+		 
+		    System.out.println(fromJson);
+	}
+	
+	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
 		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
 				"\\src\\main\\webapp\\printers.json");
-		HashMap<String, Object> obj = new HashMap<String, Object>();
-		obj.put("printers", printers);
+		HashMap<String, Printer> obj = new HashMap<String, Printer>();
+		
+		
 		Gson gson = new Gson();
-		writeFile.write(gson.toJson(obj));
+		writeFile.write(gson.toJson(printers));
+		
 		writeFile.close();
 	}
 	public void carregaJson() throws IOException, ParseException {
@@ -89,17 +138,17 @@ public List<Printer> carregarTXT(){
 			if(temp[3].contains("MX622") || temp[3].contains("MS622")) {
 				Mx622 mx622 = new Mx622(temp[0], temp[1], temp[2], temp[3], temp[4]);				
 				printers.add(mx622);				
-				System.out.println(mx622);
+				//System.out.println(mx622);
 				
 			}else if(temp[3].contains("MX910")) {
 				Mx910 mx910 = new Mx910(temp[0], temp[1], temp[2], temp[3], temp[4]);
 				printers.add(mx910);				
-				System.out.println(mx910);
+				//System.out.println(mx910);
 				
 			}else if(temp[3].contains("CX725")) {
 				Cx725 cx725 = new Cx725(temp[0], temp[1], temp[2], temp[3], temp[4]);
 				printers.add(cx725);
-				System.out.println(cx725);
+				//System.out.println(cx725);
 			}
 			
 		}
@@ -111,6 +160,7 @@ public List<Printer> carregarTXT(){
 		
 		e.printStackTrace();
 	}
+	System.out.println(printers);
 	return printers;
 }
 
