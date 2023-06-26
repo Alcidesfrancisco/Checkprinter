@@ -1,5 +1,8 @@
 package checkPrinter.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 //import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +41,7 @@ public class Printer implements Comparable<Printer>{
 	private String serialToner;
 	private String serialUnidade;
 	private String serialKit;
+	private List<Ocorrencia> ocorrencias;
 	
 	public Printer(String name, String url, String marca, String modelo, String serial) {
 		super();
@@ -46,34 +50,34 @@ public class Printer implements Comparable<Printer>{
 		this.serial = serial;
 		this.modelo = modelo;
 		this.marca = marca;
+		this.ocorrencias = new ArrayList<Ocorrencia>();
 	}
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="PRI_ID")
+	
+	public List<Ocorrencia> getOcorrencias() {
+		return ocorrencias;
+	}
+	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+		this.ocorrencias = ocorrencias;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
-	@Column(name="PRI_NM")
 	public String getName() {
 		return name;
 	}	
-	@Column(name="PRI_NIV")
 	public Integer getNivelToner() {
 		return nivelToner;
 	}
-	@Column(name="PRI_KIT")
 	public Integer getNivelKit() {
 		return nivelKit;
 	}	
-	@Column(name="PRI_VID")
 	public Integer getNivelUnidade() {
 		return nivelUnidade;
 	}	
-	@Column(name="PRI_URL")
 	public String getUrl() {
 		return url;
 	}
-	@Column(name="PRI_STA")
 	public String getStatusToner() {
 		return statusToner;
 	}
@@ -256,6 +260,7 @@ public class Printer implements Comparable<Printer>{
 			 return "badge badge-warning";
 		 }
 	 }
+	
 	@Override
 	public String toString() {
 		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + ", nivelToner="
@@ -264,7 +269,7 @@ public class Printer implements Comparable<Printer>{
 				+ ", serial=" + serial + ", corToner=" + corToner + ", pagRestantesToner=" + pagRestantesToner
 				+ ", pagRestantesKit=" + pagRestantesKit + ", pagRestantesUnidade=" + pagRestantesUnidade
 				+ ", statusToner=" + statusToner + ", statusUnidade=" + statusUnidade + ", statuskit=" + statuskit
-				+ ", corUnidade=" + corUnidade + "]";
+				+ ", corUnidade=" + corUnidade + "]" + ocorrencias ;
 	}
 	@Override
 	public int compareTo(Printer o) {
@@ -281,7 +286,6 @@ public class Printer implements Comparable<Printer>{
 				return 0;
 			}
 		} catch (Exception e) {
-			System.out.println("catch: "+ o);
 			return 0;
 		}
 		

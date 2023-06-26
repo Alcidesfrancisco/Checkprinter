@@ -66,7 +66,7 @@ public class Mx910 extends Printer implements Runnable{
 					//KIT 
 					if(inputLine.contains("200K ")){
 						String[] quebra = inputLine.split("%");
-						System.out.println(inputLine);
+						
 						this.setNivelKit(Integer.parseInt(quebra[0].split("</B></TD><TD>")[1]));
 						this.aplicarCssNivel(this.getNivelKit());
 						if(this.getNivelKit() > 0) this.setStatuskit("OK");
@@ -74,7 +74,7 @@ public class Mx910 extends Printer implements Runnable{
 					} 
 					if (inputLine.contains("statusLine")) {
 						String[] quebra = inputLine.split(">");
-						System.out.println(inputLine);
+						
 						this.setStatus(quebra[2].split("<")[0]);
 						this.aplicarCssStatus(this.getStatus());
 					}
@@ -105,9 +105,3 @@ public class Mx910 extends Printer implements Runnable{
 
 	}
 }
-
-
-
-
-
-

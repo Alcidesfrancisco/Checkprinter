@@ -17,7 +17,7 @@ public class EnviarZap {
 		WebResource wr = c.resource(
 				url);
 		try {
-			System.out.println(gson.toJson(mensagem));
+			//System.out.println(gson.toJson(mensagem));
 			wr.type("application/json").accept("application/json")
 			.post(gson.toJson(mensagem));
 
