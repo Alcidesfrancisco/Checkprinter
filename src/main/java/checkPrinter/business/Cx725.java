@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class Cx725 extends Printer {
+public class Cx725 extends Printer implements Runnable{
 	
 	private Integer nivelUnidadeCMY;
 	private String CssUnidadeCMY;
@@ -275,14 +275,14 @@ public class Cx725 extends Printer {
 		this.serialTonerYellow = serialTonerYellow;
 	}
 
-	public void carregarArquivo() {
+	public void run() {
 
 		 //Printer printer = new Printer("NATI", "http://150.161.80.20", "84sd6f68sd4f68");
 
 		 try {
 
 			 URL url = new URL(this.getUrl() + "/webglue/rawcontent?timedRefresh=1&c=Status&lang=en");
-			 System.out.println("URL");
+			 //System.out.println("URL");
 
 			 JSONParser parser = new JSONParser();
 			 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -354,7 +354,6 @@ public class Cx725 extends Printer {
 			 this.setCssNivelToner(aplicarCssNivel(this.getNivelToner()));
 			 this.setCssUnidadeCMY(aplicarCssNivel(this.getNivelUnidadeCMY()));
 			 this.setCssNivelUnidadeCMY(aplicarCssNivel(this.getNivelUnidadeCMY()));
-			 System.out.println(this.getCssNivelUnidadeCMY());
 			 this.setCssUnidade(aplicarCssNivel(this.getNivelUnidade()));
 			 this.setCssStatusToner(aplicarCssStatus(this.getStatusToner()));
 			 this.setCssStatusUnidade(aplicarCssStatus(this.getStatusUnidade()));
@@ -379,6 +378,5 @@ public class Cx725 extends Printer {
 				+ statusUnidadeCMY + ", corUnidadeCMY=" + corUnidadeCMY + ", pagRestantesUnidadeCMY="
 				+ pagRestantesUnidadeCMY + ", CssNivelUnidadeCMY=" + CssNivelUnidadeCMY + "]";
 	}
-
 	
 }
