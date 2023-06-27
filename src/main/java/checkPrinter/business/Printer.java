@@ -52,6 +52,16 @@ public class Printer implements Comparable<Printer>{
 		this.marca = marca;
 		this.ocorrencias = new ArrayList<Ocorrencia>();
 	}
+
+	public Printer(String name, String marca, String modelo, String url, String serial, List<Ocorrencia> ocorrencias) {
+		super();
+		this.name = name;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.url = url;
+		this.serial = serial;
+		this.ocorrencias = ocorrencias;
+	}
 	
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
@@ -78,6 +88,7 @@ public class Printer implements Comparable<Printer>{
 	public String getUrl() {
 		return url;
 	}
+
 	public String getStatusToner() {
 		return statusToner;
 	}

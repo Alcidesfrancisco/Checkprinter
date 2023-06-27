@@ -60,23 +60,11 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency> <!-- easy mock -->
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<version>3.2</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.32</version>
 		</dependency>
-		
-		<dependency> <!-- h2 BD -->
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.178</version>
-		</dependency>      
 		
 		<dependency> <!-- hibernate -->
 			<groupId>org.hibernate</groupId>
@@ -95,12 +83,6 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>     
-		
-		<dependency>
-			<groupId>commons-email</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.1</version>
-		</dependency>
 		
 		 <dependency>
 		   <groupId>org.apache.httpcomponents</groupId>

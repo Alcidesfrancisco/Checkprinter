@@ -49,22 +49,28 @@ public class Index{
 				for (Printer p : printersCopia) {
 					if(p.getModelo().contains("MX622") || p.getModelo().contains("MS622")) {
 						Mx622 mx622 = new Mx622(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
+						mx622.setOcorrencias(p.getOcorrencias());
+						mx622.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(mx622);
 						thread.start();
 						printers.add(mx622);
 		
 					}else if(p.getModelo().contains("MX910")) {
 						Mx910 mx910 = new Mx910(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
+						mx910.setOcorrencias(p.getOcorrencias());
+						mx910.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(mx910);
 						thread.start();
 						printers.add(mx910);
 					}else if(p.getModelo().contains("CX725")) {
-						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());;
+						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
+						cx725.setOcorrencias(p.getOcorrencias());
+						cx725.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(cx725);
 						thread.start();
 						printers.add(cx725);
 					}					
-					p.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
+					
 				}
 				TimeUnit.SECONDS.sleep(2);
 				Collections.sort(printers);
