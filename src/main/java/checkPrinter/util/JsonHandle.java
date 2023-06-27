@@ -33,13 +33,13 @@ public class JsonHandle {
 	public static String arquivoJson = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json";
 	public static void main(String[] args) {
 
-		
+
 		JsonHandle jh = new JsonHandle();
-		 try { 
-			
+		try { 
+
 			//jh.EscreverJsonPrinters(jh.carregaGson());
 			jh.carregaJson(arquivoJson);
-			
+
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,22 +47,22 @@ public class JsonHandle {
 
 	}
 	public List<Printer> carregaJson(String path) throws IOException, ParseException {
-		
+
 		Gson gson = new Gson();
 		TypeToken<List<Printer>> tt = new TypeToken<List<Printer>>() {};
 		File file = new File(path);
 		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
 		BufferedReader reader = new BufferedReader(fileReader);
-		
+
 		String json = reader.readLine();
-		
+
 		//System.out.println(new JsonParser().parse(json));
 		JsonElement je = gson.toJsonTree(json);
 
 		List<Printer> listPrinters = gson.fromJson(je.getAsString(), tt.getType());
 		System.out.println(listPrinters);
 		return listPrinters;
-		
+
 	}
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
@@ -73,12 +73,14 @@ public class JsonHandle {
 
 		writeFile.close();
 	}
+
 	/*
-	 * public List<Printer> carregarTXT(){ List<Printer> printers = new
-	 * ArrayList<Printer>(); try {
+	 * public List<Printer> carregarTXT(){
+	 * 
+	 * List<Printer> printers = new ArrayList<Printer>(); try {
 	 * 
 	 * File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //
-	 * para Server
+	 * //para Server
 	 * 
 	 * if(!file.exists()) { file = new File(System.getProperty("user.dir") +
 	 * "\\src\\main\\webapp\\printers.txt"); //para localHost }
@@ -100,12 +102,10 @@ public class JsonHandle {
 	 * temp[1], temp[2], temp[3], temp[4]); printers.add(cx725);
 	 * //System.out.println(cx725); }
 	 * 
-	 * } fileReader.close(); reader.close();
+	 * } } fileReader.close(); reader.close();
 	 * 
+	 * } }
 	 * 
-	 * } catch (IOException e) {
-	 * 
-	 * e.printStackTrace(); } //System.out.println(printers); return printers; }
+	 * } }
 	 */
-
 }

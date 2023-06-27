@@ -44,29 +44,31 @@ public class Index{
 		printers = new ArrayList<Printer>();
 		if(new File (arquivoJson).exists()) {
 			try {
-				printers = jh.carregaJson(arquivoJson);
-				/*for (Printer p : printers) {
+				List<Printer> printersCopia = jh.carregaJson(arquivoJson);
+				
+				for (Printer p : printersCopia) {
 					if(p.getModelo().contains("MX622") || p.getModelo().contains("MS622")) {
-						Mx622 mx622 = (Mx622)p;
+						Mx622 mx622 = new Mx622(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
 						Thread thread = new Thread(mx622);
 						thread.start();
+						printers.add(mx622);
 		
 					}else if(p.getModelo().contains("MX910")) {
-						Mx910 mx910 = (Mx910)p;
-						Thread thread = new Thread((Mx910) p);
+						Mx910 mx910 = new Mx910(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
+						Thread thread = new Thread(mx910);
 						thread.start();
+						printers.add(mx910);
 					}else if(p.getModelo().contains("CX725")) {
-						Cx725 cx725 = (Cx725) p;
-						cx725.carregarArquivo();
+						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());;
+						Thread thread = new Thread(cx725);
+						thread.start();
 						printers.add(cx725);
-					}*/
-					TimeUnit.SECONDS.sleep(2);
-					Collections.sort(printers);
-					//printers.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
-				//}
-					for (Printer p : printers) {
-						p.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
-					}
+					}					
+					p.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
+				}
+				TimeUnit.SECONDS.sleep(2);
+				Collections.sort(printers);
+				
 				System.out.println("carregado " + printers);
 				System.out.println("Json Carregado");
 				jh.EscreverJsonPrinters(printers);
