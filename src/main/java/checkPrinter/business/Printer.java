@@ -3,14 +3,9 @@ package checkPrinter.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-//import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id; 
 
-/*@Entity
-@Table(name="PRI_PRINTER")*/
+
+
 public class Printer implements Comparable<Printer>{
 
 	private Integer id;
@@ -18,29 +13,17 @@ public class Printer implements Comparable<Printer>{
 	private String marca;
 	private String modelo;
 	private String status;
-	private Integer nivelToner;
-	private Integer nivelKit;
-	private Integer nivelUnidade;
-	private String url;	
-	private String cssNivel;
-	private String cssKit;
-	private String cssUnidade;
-	private String cssName;
-	private String cssStatusToner;
-	private String cssStatusUnidade;
-	private String cssStatusKit;
+	private String url;
 	private String serial;
-	private String corToner;
-	private Integer pagRestantesToner;
-	private Integer pagRestantesKit; 
-	private Integer pagRestantesUnidade;
-	private String statusToner;
-	private String statusUnidade;
-	private String statuskit;
-	private String corUnidade;
-	private String serialToner;
-	private String serialUnidade;
-	private String serialKit;
+	
+	private Toner tonerObj = new Toner();
+	
+	private UnidadeDeImagem unidade = new UnidadeDeImagem();
+	
+	private KitManutecao kitManutecao = new KitManutecao();
+	
+	private Estilo estilo = new Estilo();
+	
 	private List<Ocorrencia> ocorrencias;
 	
 	public Printer(String name, String url, String marca, String modelo, String serial) {
@@ -51,18 +34,9 @@ public class Printer implements Comparable<Printer>{
 		this.modelo = modelo;
 		this.marca = marca;
 		this.ocorrencias = new ArrayList<Ocorrencia>();
+		this.tonerObj = new Toner();
 	}
 
-	public Printer(String name, String marca, String modelo, String url, String serial, List<Ocorrencia> ocorrencias) {
-		super();
-		this.name = name;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.url = url;
-		this.serial = serial;
-		this.ocorrencias = ocorrencias;
-	}
-	
 	public List<Ocorrencia> getOcorrencias() {
 		return ocorrencias;
 	}
@@ -77,32 +51,32 @@ public class Printer implements Comparable<Printer>{
 		return name;
 	}	
 	public Integer getNivelToner() {
-		return nivelToner;
+		return tonerObj.getNivelToner();
 	}
 	public Integer getNivelKit() {
-		return nivelKit;
+		return kitManutecao.getNivelKit();
 	}	
 	public Integer getNivelUnidade() {
-		return nivelUnidade;
+		return unidade.getNivelUnidade();
 	}	
 	public String getUrl() {
 		return url;
 	}
 
 	public String getStatusToner() {
-		return statusToner;
+		return tonerObj.getStatusToner();
 	}
 	public String getCssNivel() {
-		return cssNivel;
+		return estilo.getCssNivel();
 	}
 	public String getCssKit() {
-		return cssKit;
+		return estilo.getCssKit();
 	}
 	public String getCssUnidade() {
-		return cssUnidade;
+		return estilo.getCssUnidade();
 	}
 	public String getCssName() {
-		return cssName;
+		return estilo.getCssName();
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -111,28 +85,28 @@ public class Printer implements Comparable<Printer>{
 		this.name = nome;
 	}
 	public void setNivelToner(Integer nivel) {
-		this.nivelToner = nivel;
+		this.tonerObj.setNivelToner(nivel);
 	}
 	public void setNivelKit(Integer kit) {
-		this.nivelKit = kit;
+		this.kitManutecao.setNivelKit(kit);
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
 	public void setStatusToner(String status) {
-		this.statusToner = status;
+		this.tonerObj.setStatusToner(status);
 	}
 	public void setCssNivelToner(String css) {
-		this.cssNivel = css;
+		this.estilo.setCssNivel(css);
 	}
 	public void setCssNivelKit(String cssKit) {
-		this.cssKit = cssKit;
+		this.estilo.setCssKit(cssKit);
 	}
 	public void setCssUnidade(String cssUnidade) {
-		this.cssUnidade = cssUnidade;
+		this.estilo.setCssUnidade(cssUnidade);
 	}
 	public void setCssName(String cssName) {
-		this.cssName = cssName;
+		this.estilo.setCssName(cssName);
 	}
 	public String getSerial() {
 		return serial;
@@ -142,55 +116,55 @@ public class Printer implements Comparable<Printer>{
 	}
 	
 	public String getCorToner() {
-		return corToner;
+		return tonerObj.getCorToner();
 	}
 	public Integer getPagRestantesToner() {
-		return pagRestantesToner;
+		return tonerObj.getPagRestantesToner();
 	}
 	public void setCorToner(String cor) {
-		this.corToner = cor;
+		this.tonerObj.setCorToner(cor);
 	}
 	public void setPagRestantesToner(Integer pagRestantes) {
-		this.pagRestantesToner = pagRestantes;
+		this.tonerObj.setPagRestantesToner(pagRestantes);
 	}
 	public String getStatus() {
 		return status;
 	}
 	public Integer getPagRestantesKit() {
-		return pagRestantesKit;
+		return kitManutecao.getPagRestantesKit();
 	}
 	public Integer getPagRestantesUnidade() {
-		return pagRestantesUnidade;
+		return unidade.getPagRestantesUnidade();
 	}
 	public String getStatusUnidade() {
-		return statusUnidade;
+		return unidade.getStatusUnidade();
 	}
 	public String getStatuskit() {
-		return statuskit;
+		return kitManutecao.getStatuskit();
 	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
 	public void setNivelUnidade(Integer nivelUnidade) {
-		this.nivelUnidade = nivelUnidade;
+		this.unidade.setNivelUnidade(nivelUnidade);
 	}
 	public void setPagRestantesKit(Integer pagRestantesKit) {
-		this.pagRestantesKit = pagRestantesKit;
+		this.kitManutecao.setPagRestantesKit(pagRestantesKit);
 	}
 	public void setPagRestantesUnidade(Integer pagRestantesUnidade) {
-		this.pagRestantesUnidade = pagRestantesUnidade;
+		this.unidade.setPagRestantesUnidade(pagRestantesUnidade);
 	}
 	public void setStatusUnidade(String statusUnidade) {
-		this.statusUnidade = statusUnidade;
+		this.unidade.setStatusUnidade(statusUnidade);
 	}
 	public void setStatuskit(String statuskit) {
-		this.statuskit = statuskit;
+		this.kitManutecao.setStatuskit(statuskit);
 	}
 	public String getCorUnidade() {
-		return corUnidade;
+		return unidade.getCorUnidade();
 	}
 	public void setCorUnidade(String corUnidade) {
-		this.corUnidade = corUnidade;
+		this.unidade.setCorUnidade(corUnidade);
 	}
 	public String getModelo() {
 		return modelo;
@@ -199,28 +173,28 @@ public class Printer implements Comparable<Printer>{
 		this.modelo = modelo;
 	}
 	public String getCssStatusToner() {
-		return cssStatusToner;
+		return estilo.getCssStatusToner();
 	}
 	public String getCssStatusUnidade() {
-		return cssStatusUnidade;
+		return estilo.getCssStatusUnidade();
 	}
 	public String getCssStatusKit() {
-		return cssStatusKit;
+		return estilo.getCssStatusKit();
 	}
 	public void setCssNivel(String cssNivel) {
-		this.cssNivel = cssNivel;
+		this.estilo.setCssNivel(cssNivel);
 	}
 	public void setCssKit(String cssKit) {
-		this.cssKit = cssKit;
+		this.estilo.setCssKit(cssKit);
 	}
 	public void setCssStatusToner(String cssStatusToner) {
-		this.cssStatusToner = cssStatusToner;
+		this.estilo.setCssStatusToner(cssStatusToner);
 	}
 	public void setCssStatusUnidade(String cssStatusUnidade) {
-		this.cssStatusUnidade = cssStatusUnidade;
+		this.estilo.setCssStatusUnidade(cssStatusUnidade);
 	}
 	public void setCssStatusKit(String cssStatusKit) {
-		this.cssStatusKit = cssStatusKit;
+		this.estilo.setCssStatusKit(cssStatusKit);
 	}
 	public String getMarca() {
 		return marca;
@@ -231,22 +205,22 @@ public class Printer implements Comparable<Printer>{
 	
 	
 	public String getSerialToner() {
-		return serialToner;
+		return tonerObj.getSerialToner();
 	}
 	public String getSerialUnidade() {
-		return serialUnidade;
+		return unidade.getSerialUnidade();
 	}
 	public String getSerialKit() {
-		return serialKit;
+		return kitManutecao.getSerialKit();
 	}
 	public void setSerialToner(String serialToner) {
-		this.serialToner = serialToner;
+		this.tonerObj.setSerialToner(serialToner);
 	}
 	public void setSerialUnidade(String serialUnidade) {
-		this.serialUnidade = serialUnidade;
+		this.unidade.setSerialUnidade(serialUnidade);
 	}
 	public void setSerialKit(String serialKit) {
-		this.serialKit = serialKit;
+		this.kitManutecao.setSerialKit(serialKit);
 	}
 	public String aplicarCssNivel(Integer nivel) {
 		 if(nivel < 30)
@@ -275,12 +249,12 @@ public class Printer implements Comparable<Printer>{
 	@Override
 	public String toString() {
 		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + ", nivelToner="
-				+ nivelToner + ", nivelKit=" + nivelKit + ", nivelUnidade=" + nivelUnidade + ", url=" + url
-				+ ", cssNivel=" + cssNivel + ", cssKit=" + cssKit + ", cssUnidade=" + cssUnidade + ", cssName=" + cssName
-				+ ", serial=" + serial + ", corToner=" + corToner + ", pagRestantesToner=" + pagRestantesToner
-				+ ", pagRestantesKit=" + pagRestantesKit + ", pagRestantesUnidade=" + pagRestantesUnidade
-				+ ", statusToner=" + statusToner + ", statusUnidade=" + statusUnidade + ", statuskit=" + statuskit
-				+ ", corUnidade=" + corUnidade + "]" + ocorrencias ;
+				+ tonerObj.getNivelToner() + ", nivelKit=" + kitManutecao.getNivelKit() + ", nivelUnidade=" + unidade.getNivelUnidade() + ", url=" + url
+				+ ", cssNivel=" + estilo.getCssNivel() + ", cssKit=" + estilo.getCssKit() + ", cssUnidade=" + estilo.getCssUnidade() + ", cssName=" + estilo.getCssName()
+				+ ", serial=" + serial + ", corToner=" + tonerObj.getCorToner() + ", pagRestantesToner=" + tonerObj.getPagRestantesToner()
+				+ ", pagRestantesKit=" + kitManutecao.getPagRestantesKit() + ", pagRestantesUnidade=" + unidade.getPagRestantesUnidade()
+				+ ", statusToner=" + tonerObj.getStatusToner() + ", statusUnidade=" + unidade.getStatusUnidade() + ", statuskit=" + kitManutecao.getStatuskit()
+				+ ", corUnidade=" + unidade.getCorUnidade() + "]" + ocorrencias ;
 	}
 	@Override
 	public int compareTo(Printer o) {
@@ -288,7 +262,7 @@ public class Printer implements Comparable<Printer>{
 			if (o.status.equals("Offline")) {
 				return -1;
 			}else if (!o.equals(null) &  !this.equals(null) &
-					!o.nivelToner.equals(null) & !this.nivelToner.equals(null) &
+					!o.tonerObj.getNivelToner().equals(null) & !this.tonerObj.getNivelToner().equals(null) &
 					this.getNivelToner() > o.getNivelToner()) {
 				return 1;
 			}else if (this.getNivelToner() < o.getNivelToner()) {

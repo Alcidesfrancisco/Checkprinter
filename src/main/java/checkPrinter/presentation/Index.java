@@ -42,6 +42,10 @@ public class Index{
 
 	public Index() {
 		printers = new ArrayList<Printer>();
+		initPrinters();
+		
+	}
+	private void initPrinters() {
 		if(new File (arquivoJson).exists()) {
 			try {
 				List<Printer> printersCopia = jh.carregaJson(arquivoJson);
@@ -90,8 +94,6 @@ public class Index{
 			System.out.println("LoadFile()2");
 			loadFile();
 		}
-		
-		
 	}
 
 

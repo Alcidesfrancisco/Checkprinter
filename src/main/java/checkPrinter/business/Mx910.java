@@ -50,10 +50,11 @@ public class Mx910 extends Printer implements Runnable{
 							this.setNivelToner(Integer.parseInt(quebra[1].split("%")[0])); //Cartucho preto
 							this.setStatusToner("OK");
 							this.aplicarCssNivel(this.getNivelToner());
-
-
-
 						}
+					}
+					if(inputLine.contains("cobertura")) {
+						String[] quebra = inputLine.split(" ");
+						this.setPagRestantesToner(Integer.parseInt(quebra[3].replace(".", "")));
 					}
 					//UNIDADE
 					if (inputLine.contains("Fotocondutor")){
