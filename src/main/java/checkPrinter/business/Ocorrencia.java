@@ -6,7 +6,6 @@ public class Ocorrencia {
 	
 	
 	private String printerSerial;
-	private Integer id;
 	private String mensagem;
 	private String tipo;
 	private Date timeStamp;
@@ -14,10 +13,10 @@ public class Ocorrencia {
 	
 	
 	
-	public Ocorrencia(String printerSerial, Integer id, String mensagem, String tipo, Date timeStamp) {
+	public Ocorrencia(String printerSerial,String mensagem, String tipo, Date timeStamp) {
 		super();
 		this.printerSerial = printerSerial;
-		this.id = id;
+
 		this.mensagem = mensagem;
 		this.tipo = tipo;
 		this.timeStamp = timeStamp;
@@ -35,12 +34,6 @@ public class Ocorrencia {
 	}
 	public void setPrinterSerial(String printerSerial) {
 		this.printerSerial = printerSerial;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getMensagem() {
 		return mensagem;
@@ -63,7 +56,7 @@ public class Ocorrencia {
 	
 	@Override
 	public String toString() {
-		return "Ocorrencia [printerSerial=" + printerSerial + ", id=" + id + ", mensagem=" + mensagem + ", tipo=" + tipo
+		return "Ocorrencia [printerSerial=" + printerSerial + ", mensagem=" + mensagem + ", tipo=" + tipo
 				+ ", timeStamp=" + timeStamp + ", status=" + status + "]";
 	}
 	

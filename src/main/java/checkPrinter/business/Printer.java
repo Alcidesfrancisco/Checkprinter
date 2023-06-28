@@ -16,6 +16,8 @@ public class Printer implements Comparable<Printer>{
 	private String url;
 	private String serial;
 	
+	private Integer totalImpressoes;
+	
 	private Toner tonerObj = new Toner();
 	
 	private UnidadeDeImagem unidade = new UnidadeDeImagem();
@@ -35,6 +37,7 @@ public class Printer implements Comparable<Printer>{
 		this.marca = marca;
 		this.ocorrencias = new ArrayList<Ocorrencia>();
 		this.tonerObj = new Toner();
+		this.totalImpressoes = 0;
 	}
 
 	public List<Ocorrencia> getOcorrencias() {
@@ -225,17 +228,17 @@ public class Printer implements Comparable<Printer>{
 	public String aplicarCssNivel(Integer nivel) {
 		 if(nivel < 30)
 		 {
-			 return "progress-bar bg-danger";
+			 return "progress-bar progress-bar-striped bg-danger";
 
 		 }else if(nivel > 30 && nivel < 50)
 		 {							
-			 return "progress-bar bg-warning";
+			 return "progress-bar progress-bar-striped bg-warning";
 
 		 } else if(nivel >= 50 && nivel < 75){
-			 return "progress-bar bg-info";
+			 return "progress-bar progress-bar-striped bg-info";
 		 }
 		 else{
-			 return "progress-bar bg-success";
+			 return "progress-bar progress-bar-striped bg-success";
 		 }
 	 }
 	 public String aplicarCssStatus(String status) {
@@ -275,6 +278,14 @@ public class Printer implements Comparable<Printer>{
 		}
 		
 		
+	}
+
+	public Integer getTotalImpressoes() {
+		return totalImpressoes;
+	}
+
+	public void setTotalImpressoes(Integer totalImpressoes) {
+		this.totalImpressoes = totalImpressoes;
 	}
 
 	

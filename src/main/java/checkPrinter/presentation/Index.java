@@ -41,20 +41,24 @@ public class Index{
 
 
 	public Index() {
-		printers = new ArrayList<Printer>();
+		
 		initPrinters();
 		
 	}
 	private void initPrinters() {
+		printers = new ArrayList<Printer>();
 		if(new File (arquivoJson).exists()) {
 			try {
-				List<Printer> printersCopia = jh.carregaJson(arquivoJson);
+				List<Printer> printersTemp = jh.carregaJson(arquivoJson);
+				if(printersTemp.size() == 0) throw new IOException();
 				
-				for (Printer p : printersCopia) {
+				for (Printer p : printersTemp) {
 					if(p.getModelo().contains("MX622") || p.getModelo().contains("MS622")) {
 						Mx622 mx622 = new Mx622(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
+						Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date());
+						
 						mx622.setOcorrencias(p.getOcorrencias());
-						mx622.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
+						mx622.getOcorrencias().add(ocorrencia);
 						Thread thread = new Thread(mx622);
 						thread.start();
 						printers.add(mx622);
@@ -62,14 +66,14 @@ public class Index{
 					}else if(p.getModelo().contains("MX910")) {
 						Mx910 mx910 = new Mx910(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
 						mx910.setOcorrencias(p.getOcorrencias());
-						mx910.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
+						mx910.getOcorrencias().add(new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(mx910);
 						thread.start();
 						printers.add(mx910);
 					}else if(p.getModelo().contains("CX725")) {
 						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
 						cx725.setOcorrencias(p.getOcorrencias());
-						cx725.getOcorrencias().add(new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "impressora carregada do Json", "impressora", new Date()));
+						cx725.getOcorrencias().add(new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(cx725);
 						thread.start();
 						printers.add(cx725);
@@ -150,7 +154,7 @@ public class Index{
 			
 			for (Printer p : printers) {
 				System.out.println(p.getOcorrencias());
-				Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), p.getSerial().hashCode(), "Impressora Carregada", "impressora", new Date());
+				Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "Impressora Carregada", "impressora", new Date());
 				p.getOcorrencias().add(ocorrencia);
 				enviarMensagemZap(p);
 			}

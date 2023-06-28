@@ -42,9 +42,16 @@
 						</f:facet>
 						<span class="#{printer.cssName}" >#{printer.name.replaceAll('_',' ')} - <a href="#{printer.url}" target="_blank">#{printer.url}</a> - #{printer.status}
 						<br />
-						#{printer.marca} &nbsp;  #{printer.modelo} - <span class="badge badge-pill badge-dark" title="Serial da impressora">#{printer.serial}</span></span>
+						#{printer.marca} &nbsp;  #{printer.modelo} - <span class="badge badge-pill badge-dark" title="Serial da impressora">#{printer.serial}</span>
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="color: white; margin-left: 30px" title="Total de impressões ">
+						    #{printer.totalImpressoes}
+						    <span class="visually-hidden"></span>
+						  </span>
+						</span>
+						
 					</h:column>
 					<h:column>
+					
 						<f:facet name="header">
 							Toner
 						</f:facet>
