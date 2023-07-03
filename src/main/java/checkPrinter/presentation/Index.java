@@ -62,6 +62,7 @@ public class Index{
 						Thread thread = new Thread(mx622);
 						thread.start();
 						printers.add(mx622);
+						enviarMensagemZap(p);
 		
 					}else if(p.getModelo().contains("MX910")) {
 						Mx910 mx910 = new Mx910(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
@@ -70,6 +71,7 @@ public class Index{
 						Thread thread = new Thread(mx910);
 						thread.start();
 						printers.add(mx910);
+						
 					}else if(p.getModelo().contains("CX725")) {
 						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
 						cx725.setOcorrencias(p.getOcorrencias());
@@ -171,12 +173,15 @@ public class Index{
 		try {
 			if(printer.getNivelToner() <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
-						+ "Modelo: " + printer.getMarca() + " " + printer.getModelo() + "\n"
+						+ "Marca: " + printer.getMarca() + "\n"
+						+ "Modelo: " + printer.getModelo() + "\n " 
 						+ "Serial: " + printer.getSerial() + "\n"
 						+ "IP: " + printer.getUrl() + "\n"
 						+ "Nivel do Toner: " + printer.getNivelToner() + "%\n"
 						+ "Serial do Toner: " + printer.getSerialToner() + "\n"
-						+ "P�ginas restantes: " + printer.getPagRestantesToner() + "\n";
+						+ "Páginas restantes: " + printer.getPagRestantesToner() + "\n"
+						+ "\n"
+						+ "Digite a opção de resposta (OK)- ";
 				
 				
 				zap.enviaNotificacao(mensagem);
