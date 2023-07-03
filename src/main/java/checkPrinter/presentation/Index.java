@@ -174,7 +174,7 @@ public class Index{
 			if(printer.getNivelToner() <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
 						+ "Marca: " + printer.getMarca() + "\n"
-						+ "Modelo: " + printer.getModelo() + "\n " 
+						+ "Modelo: " + printer.getModelo() + "\n" 
 						+ "Serial: " + printer.getSerial() + "\n"
 						+ "IP: " + printer.getUrl() + "\n"
 						+ "Nivel do Toner: " + printer.getNivelToner() + "%\n"

@@ -9,7 +9,7 @@ public class EnviarZap {
 	private Client c = Client.create();
 	private Gson gson = new Gson();
 	private String url = "http://localhost:8000/zap-bot-message";
-	private String numeroDoZap = "558191159128"; // número de Denisson
+	private String numeroDoZap = "558197143365"; // número de Denisson
 
 	public String enviaNotificacao(String texto) {
 
