@@ -71,6 +71,7 @@ public class Index{
 						Thread thread = new Thread(mx910);
 						thread.start();
 						printers.add(mx910);
+						enviarMensagemZap(mx910);
 						
 					}else if(p.getModelo().contains("CX725")) {
 						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
@@ -79,14 +80,15 @@ public class Index{
 						Thread thread = new Thread(cx725);
 						thread.start();
 						printers.add(cx725);
+						enviarMensagemZap(cx725);
 					}					
 					
 				}
 				TimeUnit.SECONDS.sleep(2);
 				Collections.sort(printers);
 				
-				System.out.println("carregado " + printers);
-				System.out.println("Json Carregado");
+				//System.out.println("carregado " + printers);
+				//System.out.println("Json Carregado");
 				jh.EscreverJsonPrinters(printers);
 			} catch (IOException | ParseException e) {
 				System.out.println("LoadFile()1");
@@ -170,6 +172,9 @@ public class Index{
 	}
 	public void enviarMensagemZap(Printer printer) {
 		EnviarZap zap = new EnviarZap();
+		
+		//TODO receber as mensagens na API para usar o resultado para filtrar se as mensagens de lá já fora lida ou não
+		System.out.println(zap.getMemsagensAPI());
 		try {
 			if(printer.getNivelToner() <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
@@ -183,11 +188,12 @@ public class Index{
 						+ "\n"
 						+ "Digite a opção de resposta (OK)- ";
 				
-				
+				//TODO - mudar argumento para printer
 				zap.enviaNotificacao(mensagem);
 			}
 		} catch (Exception e) {
-			System.out.println("Deu merda" + e.getStackTrace());
+			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
+					e.printStackTrace();
 		}
 		
 	}
