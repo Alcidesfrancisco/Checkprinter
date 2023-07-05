@@ -12,6 +12,8 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.WebResource;
 
+import checkPrinter.business.Printer;
+
 public class EnviarZap {
 
 	private Client c = Client.create();
@@ -42,6 +44,30 @@ public class EnviarZap {
 
 		return "mensagem enviada com sucesso";
 	}
+	public String enviaPrinter(Printer printer) {
+
+		
+		WebResource wr = c.resource(
+				"http://localhost:8000/zap-bot-printer");
+		
+		try {
+			//System.out.println(gson.toJson(mensagem));
+			
+			wr.type("application/json").accept("application/json")
+			.header("tipo_mensagem", "printer")
+			.post(gson.toJson(printer));
+			//wr.setProperty("propied", "testandoooo");
+			
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+
+		return "mensagem enviada com sucesso";
+	}
+	
+	
 	public List<Mensagem> getMemsagensAPI(){
 		List<Mensagem> lista = new ArrayList<Mensagem>();
 		WebResource wr = c.resource(

@@ -71,7 +71,7 @@ public class Index{
 						Thread thread = new Thread(mx910);
 						thread.start();
 						printers.add(mx910);
-						enviarMensagemZap(mx910);
+						enviarMensagemZap(p);
 						
 					}else if(p.getModelo().contains("CX725")) {
 						Cx725 cx725 = new Cx725(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
@@ -80,7 +80,7 @@ public class Index{
 						Thread thread = new Thread(cx725);
 						thread.start();
 						printers.add(cx725);
-						enviarMensagemZap(cx725);
+						enviarMensagemZap(p);
 					}					
 					
 				}
@@ -174,9 +174,9 @@ public class Index{
 		EnviarZap zap = new EnviarZap();
 		
 		//TODO receber as mensagens na API para usar o resultado para filtrar se as mensagens de lá já fora lida ou não
-		System.out.println(zap.getMemsagensAPI());
+		//System.out.println(zap.getMemsagensAPI());
 		try {
-			if(printer.getNivelToner() <= 10){
+			if(!printer.getNivelToner().equals(null) && printer.getNivelToner()  <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
 						+ "Marca: " + printer.getMarca() + "\n"
 						+ "Modelo: " + printer.getModelo() + "\n" 
@@ -193,7 +193,7 @@ public class Index{
 			}
 		} catch (Exception e) {
 			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 		}
 		
 	}

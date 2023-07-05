@@ -59,9 +59,11 @@ public class JsonHandle {
 	}
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
+		System.out.println("criar Json!!!!!");
 		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
 				"\\src\\main\\webapp\\printers.json");
 		Gson gson = new Gson();
+		System.out.println("criar Json!!!!!");
 		writeFile.write(gson.toJson(printers));
 
 		writeFile.close();
