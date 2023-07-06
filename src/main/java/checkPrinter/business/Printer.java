@@ -21,7 +21,7 @@ public class Printer implements Comparable<Printer>{
 	private String url;
 	private String serial;
 
-	private Integer totalImpressoes;
+	protected Integer totalImpressoes;
 
 	private Toner tonerObj = new Toner();
 
@@ -256,7 +256,7 @@ public class Printer implements Comparable<Printer>{
 
 	@Override
 	public String toString() {
-		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + ", nivelToner="
+		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + "Total de impressoes= "+totalImpressoes + ", nivelToner="
 				+ tonerObj.getNivelToner() + ", nivelKit=" + kitManutecao.getNivelKit() + ", nivelUnidade=" + unidade.getNivelUnidade() + ", url=" + url
 				+ ", cssNivel=" + estilo.getCssNivel() + ", cssKit=" + estilo.getCssKit() + ", cssUnidade=" + estilo.getCssUnidade() + ", cssName=" + estilo.getCssName()
 				+ ", serial=" + serial + ", corToner=" + tonerObj.getCorToner() + ", pagRestantesToner=" + tonerObj.getPagRestantesToner()

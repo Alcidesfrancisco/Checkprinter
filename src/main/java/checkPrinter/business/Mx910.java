@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
+
 public class Mx910 extends Printer implements Runnable{
+
 
 	public Mx910(String name, String url, String marca, String modelo, String serial) {
 		super(name, url, marca, modelo, serial);
@@ -54,13 +59,11 @@ public class Mx910 extends Printer implements Runnable{
 					}
 					if(inputLine.contains("Approximately")) {
 						String[] quebra = inputLine.split(" ");
-						System.out.println(quebra[3]);
 						this.setPagRestantesToner(Integer.parseInt(quebra[3].replace(",", "")));
 					}
 					//UNIDADE
 					if (inputLine.contains("Photoconductor")){
 						String[] quebra = inputLine.split("%");
-						System.out.println(quebra[0]);
 						this.setNivelUnidade(Integer.parseInt(quebra[0].split("</B></TD><TD>")[1]));
 						this.aplicarCssNivel(this.getNivelUnidade());
 						if(this.getNivelUnidade() > 0) this.setStatusUnidade("OK");
@@ -70,7 +73,7 @@ public class Mx910 extends Printer implements Runnable{
 					//KIT 
 					if(inputLine.contains("200K ")){
 						String[] quebra = inputLine.split("%");
-						
+
 						this.setNivelKit(Integer.parseInt(quebra[0].split("</B></TD><TD>")[1]));
 						this.aplicarCssNivel(this.getNivelKit());
 						if(this.getNivelKit() > 0) this.setStatuskit("OK");
@@ -78,13 +81,13 @@ public class Mx910 extends Printer implements Runnable{
 					} 
 					if (inputLine.contains("statusLine")) {
 						String[] quebra = inputLine.split(">");
-						
+
 						this.setStatus(quebra[2].split("<")[0]);
 						this.aplicarCssStatus(this.getStatus());
 					}
 				}
 
-				//this.setEstatisticasPrinter();
+
 			}else{
 				throw new IOException();
 			}
@@ -99,12 +102,58 @@ public class Mx910 extends Printer implements Runnable{
 			this.setCssStatusKit(aplicarCssStatus(this.getStatuskit()));
 			this.setCorToner("black");
 			this.setCorUnidade("black");
+
 		}catch(SocketTimeoutException e){
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
 		} catch (IOException e) {
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
+		}
+		//this.setEstatisticasPrinter910();
+	}
+	
+	public void setEstatisticasPrinter910() {
+
+		URL url;
+		try {
+			url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
+
+
+
+
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			/*
+			 * conn.setReadTimeout(1000); conn.setConnectTimeout(1000);
+			 */
+
+			System.out.println(conn.getResponseCode());
+
+			BufferedReader in;
+			if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
+			{
+
+				in = new BufferedReader(new InputStreamReader(url.openStream()));
+				String inputLine;
+				int cont = 0;
+				for (int i = 0; i < 205; i++) {
+					inputLine = in.readLine();
+					if(i == 204) {
+						this.totalImpressoes = Integer.parseInt(inputLine.split("</p></td><td><p> ")[1].split(" ")[0]);
+						System.out.println(this.totalImpressoes);
+					}
+				} 
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();		
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

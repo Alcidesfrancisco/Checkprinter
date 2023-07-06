@@ -70,6 +70,8 @@ public class Index{
 						mx910.getOcorrencias().add(new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(mx910);
 						thread.start();
+						System.err.println(mx910);
+						mx910.setEstatisticasPrinter910();
 						printers.add(mx910);
 						enviarMensagemZap(p);
 						
