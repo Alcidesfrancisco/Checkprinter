@@ -43,7 +43,7 @@
 						<span class="#{printer.cssName}" >#{printer.name.replaceAll('_',' ')} - <a href="#{printer.url}" target="_blank">#{printer.url}</a> - #{printer.status}
 						<br />
 						#{printer.marca} &nbsp;  #{printer.modelo} - <span class="badge badge-pill badge-dark" title="Serial da impressora">#{printer.serial}</span>
-						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="color: white; margin-left: 30px" title="Total de impressões ">
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="color: white; margin-left: 20px; text-align: right;" title="Total de impressões ">
 						    #{printer.totalImpressoes}
 						    <span class="visually-hidden"></span>
 						  </span>
@@ -108,31 +108,31 @@
 						<f:facet name="header">
 							Unidade de imagem
 						</f:facet>
-						<div class="progress">
+						<div class="progress" title="Nível da Unidade de Imagem">
 						  <div class="#{printer.cssUnidade}" role="progressbar" aria-valuenow="#{printer.nivelUnidade}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelUnidade}%;">
 						    #{printer.nivelUnidade}%
 						  </div>
 						  
 						 </div>
-						 <span class="badge badge-dark">#{printer.corUnidade}</span>
-						<span class="badge badge-primary">#{printer.pagRestantesUnidade}</span>
-						<span class="badge badge-pill badge-dark">#{printer.serialUnidade}</span>
-						<span class="#{printer.cssStatusUnidade}">#{printer.statusUnidade}</span>
+						 <span class="badge badge-dark" title="Cor da Unidade e Imagem">#{printer.corUnidade}</span>
+						<span class="badge badge-primary" title="Páginas restantes">#{printer.pagRestantesUnidade}</span>
+						<span class="badge badge-pill badge-dark" title="Serial da Unidade de Imagem">#{printer.serialUnidade}</span>
+						<span class="#{printer.cssStatusUnidade}" title="Status da Unidade de Imagem">#{printer.statusUnidade}</span>
 				
 						  
 						  <h:panelGrid width="100%" rendered="#{printer.modelo == 'CX725'}">
 						  #{index.printerConverter(printer)}
 						  
-						   <div class="progress">
+						   <div class="progress" title="N´vem da Unidade de Imagem">
 							  <div class="#{index.cx.cssUnidadeCMY}" role="progressbar" aria-valuenow="#{index.cx.nivelUnidadeCMY}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelUnidadeCMY}%;">
 							    #{index.cx.nivelUnidadeCMY}%
 							  </div>
 						    </div>
 						  
-						   <span class="badge badge-info" style="background-color: orange">#{index.cx.corUnidadeCMY}</span>
-						<span class="badge badge-primary">#{index.cx.pagRestantesUnidadeCMY}</span>
-						<span class="badge badge-pill badge-dark">#{index.cx.serialUnidadeCMY}</span>
-						<span class="#{printer.cssStatusUnidade}">#{index.cx.statusUnidadeCMY}</span>
+						   <span class="badge badge-info" style="background-color: orange" title="Cor Unidade de imagem">#{index.cx.corUnidadeCMY}</span>
+						<span class="badge badge-primary" title="Páginas restantes">#{index.cx.pagRestantesUnidadeCMY}</span>
+						<span class="badge badge-pill badge-dark" title="Serial Unidade de Imagem">#{index.cx.serialUnidadeCMY}</span>
+						<span class="#{printer.cssStatusUnidade}" title="Status Unidade de imagem">#{index.cx.statusUnidadeCMY}</span>
 						</h:panelGrid>
 				
 					</h:column>
@@ -140,14 +140,14 @@
 						<f:facet name="header">
 							Kit manutenção
 						</f:facet>
-						<div class="progress">
+						<div class="progress" title="nível kit">
 						  <div class="#{printer.cssKit}" role="progressbar" aria-valuenow="#{printer.nivelKit}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelKit}%;">
 						    #{printer.nivelKit}%
 						  </div>
 						</div>
-						<span class="badge badge-primary">#{printer.pagRestantesKit}</span>
-						<span class="badge badge-pill badge-dark">#{printer.serialKit}</span>
-						<span class="#{printer.cssStatusKit}">#{printer.statuskit}</span>
+						<span class="badge badge-primary" title="Páginas restantes">#{printer.pagRestantesKit}</span>
+						<span class="badge badge-pill badge-dark" title="Serial Kit">#{printer.serialKit}</span>
+						<span class="#{printer.cssStatusKit}" title="Status kit">#{printer.statuskit}</span>
 												
 					</h:column>
 					

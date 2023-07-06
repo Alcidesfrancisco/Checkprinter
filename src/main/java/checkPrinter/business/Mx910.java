@@ -82,7 +82,7 @@ public class Mx910 extends Printer implements Runnable{
 					}
 				}
 
-
+				//this.setEstatisticasPrinter();
 			}else{
 				throw new IOException();
 			}

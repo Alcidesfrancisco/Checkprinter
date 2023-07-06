@@ -348,6 +348,7 @@ public class Cx725 extends Printer implements Runnable{
 				 this.setCorUnidadeCMY("Color");
 				 this.setSerialUnidadeCMY(cmy.get("serialNumber").toString());
 				 
+				 this.setEstatisticasPrinter();
 			 }else {
 				 throw new IOException();
 			 }

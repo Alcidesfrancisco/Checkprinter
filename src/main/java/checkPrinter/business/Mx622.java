@@ -64,6 +64,8 @@ public class Mx622 extends Printer implements Runnable{
 				this.setCssName("list-group-item list-group-item-danger");
 				throw new IOException();
 			}
+			
+			
 			//loadHTML(this);
 			this.setCssNivelToner(aplicarCssNivel(this.getNivelToner()));
 			this.setCssNivelKit(aplicarCssNivel(this.getNivelKit()));
@@ -73,6 +75,7 @@ public class Mx622 extends Printer implements Runnable{
 			this.setCssStatusKit(aplicarCssStatus(this.getStatuskit()));
 			this.setCssName("list-group-item list-group-item-success");
 			this.setStatus("Online");
+			this.setEstatisticasPrinter();
 		}catch(SocketTimeoutException e){
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
@@ -83,5 +86,6 @@ public class Mx622 extends Printer implements Runnable{
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
 		}
+		
 	}
 }

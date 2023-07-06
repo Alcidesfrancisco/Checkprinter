@@ -1,5 +1,10 @@
 package checkPrinter.business;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +20,19 @@ public class Printer implements Comparable<Printer>{
 	private String status;
 	private String url;
 	private String serial;
-	
+
 	private Integer totalImpressoes;
-	
+
 	private Toner tonerObj = new Toner();
-	
+
 	private UnidadeDeImagem unidade = new UnidadeDeImagem();
-	
+
 	private KitManutecao kitManutecao = new KitManutecao();
-	
+
 	private Estilo estilo = new Estilo();
-	
+
 	private List<Ocorrencia> ocorrencias;
-	
+
 	public Printer(String name, String url, String marca, String modelo, String serial) {
 		super();
 		this.name = name;
@@ -46,7 +51,7 @@ public class Printer implements Comparable<Printer>{
 	public void setOcorrencias(List<Ocorrencia> ocorrencias) {
 		this.ocorrencias = ocorrencias;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -117,7 +122,7 @@ public class Printer implements Comparable<Printer>{
 	public void setSerial(String serial) {
 		this.serial = serial;
 	}
-	
+
 	public String getCorToner() {
 		return tonerObj.getCorToner();
 	}
@@ -205,8 +210,8 @@ public class Printer implements Comparable<Printer>{
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
-	
-	
+
+
 	public String getSerialToner() {
 		return tonerObj.getSerialToner();
 	}
@@ -226,29 +231,29 @@ public class Printer implements Comparable<Printer>{
 		this.kitManutecao.setSerialKit(serialKit);
 	}
 	public String aplicarCssNivel(Integer nivel) {
-		 if(nivel < 30)
-		 {
-			 return "progress-bar progress-bar-striped bg-danger";
+		if(nivel < 30)
+		{
+			return "progress-bar progress-bar-striped bg-danger";
 
-		 }else if(nivel > 30 && nivel < 50)
-		 {							
-			 return "progress-bar progress-bar-striped bg-warning";
+		}else if(nivel > 30 && nivel < 50)
+		{							
+			return "progress-bar progress-bar-striped bg-warning";
 
-		 } else if(nivel >= 50 && nivel < 75){
-			 return "progress-bar progress-bar-striped bg-info";
-		 }
-		 else{
-			 return "progress-bar progress-bar-striped bg-success";
-		 }
-	 }
-	 public String aplicarCssStatus(String status) {
-		 if(status != null && status.contains("OK")) {
-			 return "badge badge-success";
-		 }else {
-			 return "badge badge-warning";
-		 }
-	 }
-	
+		} else if(nivel >= 50 && nivel < 75){
+			return "progress-bar progress-bar-striped bg-info";
+		}
+		else{
+			return "progress-bar progress-bar-striped bg-success";
+		}
+	}
+	public String aplicarCssStatus(String status) {
+		if(status != null && status.contains("OK")) {
+			return "badge badge-success";
+		}else {
+			return "badge badge-warning";
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + ", nivelToner="
@@ -276,8 +281,8 @@ public class Printer implements Comparable<Printer>{
 		} catch (Exception e) {
 			return 0;
 		}
-		
-		
+
+
 	}
 
 	public Integer getTotalImpressoes() {
@@ -288,8 +293,31 @@ public class Printer implements Comparable<Printer>{
 		this.totalImpressoes = totalImpressoes;
 	}
 
-	
-	
-	
+	public void setEstatisticasPrinter() throws IOException {
+
+		URL url = new URL(this.getUrl() + "/webglue/getReport?name=PrintConfigHealthCheckStatistics&lang=en");
+
+
+
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setReadTimeout(1000);
+
+		conn.setConnectTimeout(1000);
+
+		BufferedReader in;
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
+		{
+
+			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String inputLine;
+
+			while ((inputLine = in.readLine()) != null) {
+				if(inputLine.contains("Page")) {
+					this.totalImpressoes = Integer.parseInt(inputLine.split("</div></li><li><div")[13].split(">")[1]);
+					}
+				}
+				
+			}
+		}
 	
 }
