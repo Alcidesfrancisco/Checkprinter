@@ -38,7 +38,7 @@ public class Mx910 extends Printer implements Runnable{
 				while ((inputLine = in.readLine()) != null) {
 
 					//TONER
-					if(inputLine.contains("Cartucho Preto")){
+					if(inputLine.contains("Black Cartridge")){
 
 						if (!inputLine.contains("~")){
 							this.setNivelToner(0);
@@ -52,13 +52,15 @@ public class Mx910 extends Printer implements Runnable{
 							this.aplicarCssNivel(this.getNivelToner());
 						}
 					}
-					if(inputLine.contains("cobertura")) {
+					if(inputLine.contains("Approximately")) {
 						String[] quebra = inputLine.split(" ");
-						this.setPagRestantesToner(Integer.parseInt(quebra[3].replace(".", "")));
+						System.out.println(quebra[3]);
+						this.setPagRestantesToner(Integer.parseInt(quebra[3].replace(",", "")));
 					}
 					//UNIDADE
-					if (inputLine.contains("Fotocondutor")){
+					if (inputLine.contains("Photoconductor")){
 						String[] quebra = inputLine.split("%");
+						System.out.println(quebra[0]);
 						this.setNivelUnidade(Integer.parseInt(quebra[0].split("</B></TD><TD>")[1]));
 						this.aplicarCssNivel(this.getNivelUnidade());
 						if(this.getNivelUnidade() > 0) this.setStatusUnidade("OK");
