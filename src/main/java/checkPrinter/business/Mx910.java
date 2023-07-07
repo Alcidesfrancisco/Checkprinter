@@ -112,49 +112,34 @@ public class Mx910 extends Printer implements Runnable{
 		}
 		//this.setEstatisticasPrinter910();
 	}
-	
-	public void setEstatisticasPrinter910() {
+
+	public void setEstatisticasPrinterMX910() {
 
 		URL url;
+		HttpURLConnection conn = null;
 		try {
 			url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
 
+			conn = (HttpURLConnection) url.openConnection();			
+			conn.setReadTimeout(3000); conn.setConnectTimeout(1000);
 
-
-
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			/*
-			 * conn.setReadTimeout(1000); conn.setConnectTimeout(1000);
-			 */
-
-			System.out.println(conn.getResponseCode());
-
-			BufferedReader in;
 			if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
 			{
 
-				in = new BufferedReader(new InputStreamReader(url.openStream()));
+				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 				String inputLine;
-				int cont = 0;
 				for (int i = 0; i < 205; i++) {
 					inputLine = in.readLine();
 					if(i == 204) {
 						this.totalImpressoes = Integer.parseInt(inputLine.split("</p></td><td><p> ")[1].split(" ")[0]);
-						System.out.println(this.totalImpressoes);
 					}
 				} 
 			}
-		} catch (MalformedURLException e) {
-			e.printStackTrace();		
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			conn.disconnect();
+		} catch (NumberFormatException | IOException e) {
+			System.err.println(this.getName() + " OffLine");		
 
+
+		}
 	}
 }

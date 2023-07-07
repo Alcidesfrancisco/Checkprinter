@@ -7,9 +7,17 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
@@ -42,70 +50,88 @@ public class JsonHandle {
 	public List<Printer> carregaJson(String path) throws IOException, ParseException {
 
 		Gson gson = new Gson();
-		TypeToken<List<Printer>> tt = new TypeToken<List<Printer>>() {};
+		TypeToken<HashMap<String,  List<Printer>>> tt = new TypeToken<HashMap<String,  List<Printer>>>() {};
 		File file = new File(path);
 		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
 		BufferedReader reader = new BufferedReader(fileReader);
 
 		String json = reader.readLine();
 
-		//System.out.println(new JsonParser().parse(json));
 		JsonElement je = gson.toJsonTree(json);
 
-		List<Printer> listPrinters = gson.fromJson(je.getAsString(), tt.getType());
-		System.out.println(listPrinters);
-		return listPrinters;
+		HashMap<String, List<Printer>> listPrinters = gson.fromJson(je.getAsString(), tt.getType());
+		reader.close();
+		return listPrinters.get("Printers");
 
 	}
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
-		System.out.println("criar Json!!!!!");
+	
 		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
 				"\\src\\main\\webapp\\printers.json");
 		Gson gson = new Gson();
-		System.out.println("criar Json!!!!!");
-		writeFile.write(gson.toJson(printers));
+
+		HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
+		map.put("Printers", printers);
+		writeFile.write(gson.toJson( map));
 
 		writeFile.close();
 	}	
-	public List<Printer> carregarTXT(){
-	  
-	  List<Printer> printers = new ArrayList<Printer>(); 
-	  try {
-	  
-	  File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //
-	  //para Server
-	  
-	  if(!file.exists()) { file = new File(System.getProperty("user.dir") +
-	  "\\src\\main\\webapp\\printers.txt"); //para localHost }
-	  
-	  InputStreamReader fileReader = new InputStreamReader(new
-	  FileInputStream(file.getPath()), "utf-8"); BufferedReader reader = new
-	  BufferedReader(fileReader); String dados = null;
-	  
-	  while((dados = reader.readLine()) != null){ 
-		  String[] temp = dados.split(" ");
-	  if(temp[3].contains("MX622") || temp[3].contains("MS622")) { 
-		  Mx622 mx622 = new Mx622(temp[0], temp[1], temp[2], temp[3], temp[4]); printers.add(mx622);
-	  //System.out.println(mx622);
-	  
-	  }else if(temp[3].contains("MX910")) { 
-		  Mx910 mx910 = new Mx910(temp[0],temp[1], temp[2], temp[3], temp[4]); printers.add(mx910);
-	  //System.out.println(mx910);
-	  
-	  }else if(temp[3].contains("CX725")) { 
-		  Cx725 cx725 = new Cx725(temp[0],temp[1], temp[2], temp[3], temp[4]); printers.add(cx725);
-	  //System.out.println(cx725); }
-	  
-	  }
-	  }
-	  fileReader.close(); reader.close();
-	  
-	  } 
-	  
-	  }catch (Exception e) {
-		// TODO: handle exception
+
+	public Printer getPrinterJson(Printer printer){
+
+		List<Printer> lista;
+		try {
+			lista = this.carregaJson(System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json");
+
+
+			for( Printer p : lista) {
+				if(p.getSerial().equals(printer.getSerial())) {
+					return p;
+				}
+			}
+		} catch (IOException | ParseException e) {
+			System.out.println("Deu erro no GetPrinterJson");
+		}
+
+		return printer;
 	}
-	  return printers;
-	  }	 
+
+
+	public List<Printer> carregarTXT(){
+
+		List<Printer> printers = new ArrayList<Printer>(); 
+		try {
+
+			File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //
+			//para Server
+
+			if(!file.exists()) { file = new File(System.getProperty("user.dir") +
+					"\\src\\main\\webapp\\printers.txt"); //para localHost }
+
+			InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8"); 
+			BufferedReader reader = new BufferedReader(fileReader); String dados = null;
+
+			while((dados = reader.readLine()) != null){ 
+				String[] temp = dados.split(" ");
+				if(temp[3].contains("MX622") || temp[3].contains("MS622")) { 
+					Mx622 mx622 = new Mx622(temp[0], temp[1], temp[2], temp[3], temp[4]); printers.add(mx622);
+
+				}else if(temp[3].contains("MX910")) { 
+					Mx910 mx910 = new Mx910(temp[0],temp[1], temp[2], temp[3], temp[4]); printers.add(mx910);
+
+				}else if(temp[3].contains("CX725")) { 
+					Cx725 cx725 = new Cx725(temp[0],temp[1], temp[2], temp[3], temp[4]); printers.add(cx725);
+
+				}
+			}
+			fileReader.close(); reader.close();
+
+			} 
+
+		}catch (Exception e) {
+			System.out.println("Erro ao carregar TXT");
+		}
+		return printers;
+	}	 
 }

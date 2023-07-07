@@ -48,6 +48,7 @@ public class Index{
 	private void initPrinters() {
 		printers = new ArrayList<Printer>();
 		if(new File (arquivoJson).exists()) {
+			
 			try {
 				List<Printer> printersTemp = jh.carregaJson(arquivoJson);
 				if(printersTemp.size() == 0) throw new IOException();
@@ -57,8 +58,8 @@ public class Index{
 						Mx622 mx622 = new Mx622(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
 						Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date());
 						
-						mx622.setOcorrencias(p.getOcorrencias());
-						mx622.getOcorrencias().add(ocorrencia);
+						//mx622.setOcorrencias(p.getOcorrencias());
+						//mx622.getOcorrencias().add(ocorrencia);
 						Thread thread = new Thread(mx622);
 						thread.start();
 						printers.add(mx622);
@@ -70,8 +71,7 @@ public class Index{
 						mx910.getOcorrencias().add(new Ocorrencia(p.getSerial(), "impressora carregada do Json", "impressora", new Date()));
 						Thread thread = new Thread(mx910);
 						thread.start();
-						System.err.println(mx910);
-						mx910.setEstatisticasPrinter910();
+						mx910.setEstatisticasPrinterMX910();
 						printers.add(mx910);
 						enviarMensagemZap(p);
 						
@@ -87,17 +87,27 @@ public class Index{
 					
 				}
 				TimeUnit.SECONDS.sleep(2);
+		
+				for (Printer printer : printers) {
+					if(printer.getStatus().equals("Offline")) {
+						Printer obj = new JsonHandle().getPrinterJson(printer);
+						obj.setCssNivelToner(obj.aplicarCssNivel(obj.getNivelToner()));
+						obj.setCssNivelKit(obj.aplicarCssNivel(obj.getNivelKit()));
+						obj.setCssUnidade(obj.aplicarCssNivel(obj.getNivelUnidade()));
+						obj.setCssStatusToner(obj.aplicarCssStatus(obj.getStatusToner()));
+						obj.setCssStatusUnidade(obj.aplicarCssStatus(obj.getStatusUnidade()));
+						obj.setCssStatusKit(obj.aplicarCssStatus(obj.getStatuskit()));
+						printers.set(printers.indexOf(printer), obj);
+					}
+				}
 				Collections.sort(printers);
-				
-				//System.out.println("carregado " + printers);
-				//System.out.println("Json Carregado");
 				jh.EscreverJsonPrinters(printers);
 			} catch (IOException | ParseException e) {
 				System.out.println("LoadFile()1");
 				loadFile();
 				//e.printStackTrace();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Erro no Index");
 				e.printStackTrace();
 			}
 		}else {
@@ -136,6 +146,7 @@ public class Index{
 					Mx622 mx622 = new Mx622(temp[0], temp[1], temp[2], temp[3], temp[4]);
 					Thread thread = new Thread(mx622);
 					thread.start();
+					//if(mx622.getStatus().equals("Offline")) mx622 = (Mx622) new JsonHandle().getPrinterJson(mx622);
 					printers.add(mx622);
 	
 				}else if(temp[3].contains("MX910")) {
@@ -144,7 +155,6 @@ public class Index{
 					thread.start();
 					printers.add(mx910);
 					
-					System.out.println(mx910);
 				}else if(temp[3].contains("CX725")) {
 					Cx725 cx725 = new Cx725(temp[0], temp[1], temp[2], temp[3], temp[4]);
 					Thread thread = new Thread(cx725);
@@ -159,7 +169,7 @@ public class Index{
 			Collections.sort(printers);
 			
 			for (Printer p : printers) {
-				System.out.println(p.getOcorrencias());
+				
 				Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "Impressora Carregada", "impressora", new Date());
 				p.getOcorrencias().add(ocorrencia);
 				enviarMensagemZap(p);
@@ -176,7 +186,6 @@ public class Index{
 		EnviarZap zap = new EnviarZap();
 		
 		//TODO receber as mensagens na API para usar o resultado para filtrar se as mensagens de lá já fora lida ou não
-		//System.out.println(zap.getMemsagensAPI());
 		try {
 			if(!printer.getNivelToner().equals(null) && printer.getNivelToner()  <= 10){
 				String mensagem = "*AVISO DE SUPRIMENTO BAIXO DE IMPRESSORA*\n"
@@ -194,8 +203,11 @@ public class Index{
 				zap.enviaNotificacao(mensagem);
 			}
 		} catch (Exception e) {
-			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
-					System.out.println(e.getMessage());
+			
+			 System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
+			 
+			 //System.out.println(e.getMessage());
+			 
 		}
 		
 	}

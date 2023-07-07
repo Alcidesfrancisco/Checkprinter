@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
 import java.util.List;
+
 
 
 
@@ -231,7 +233,9 @@ public class Printer implements Comparable<Printer>{
 		this.kitManutecao.setSerialKit(serialKit);
 	}
 	public String aplicarCssNivel(Integer nivel) {
-		if(nivel < 30)
+		if(nivel == null) {
+		 return "progress-bar progress-bar-striped bg-danger";
+		}else if(nivel < 30)
 		{
 			return "progress-bar progress-bar-striped bg-danger";
 
@@ -245,7 +249,8 @@ public class Printer implements Comparable<Printer>{
 		else{
 			return "progress-bar progress-bar-striped bg-success";
 		}
-	}
+		}
+	
 	public String aplicarCssStatus(String status) {
 		if(status != null && status.contains("OK")) {
 			return "badge badge-success";
@@ -256,7 +261,7 @@ public class Printer implements Comparable<Printer>{
 
 	@Override
 	public String toString() {
-		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + "Total de impressoes= "+totalImpressoes + ", nivelToner="
+		return "Printer [id=" + id + ", name=" + name + ", modelo=" + modelo + ", status=" + status + " Total de impressoes= "+totalImpressoes + ", nivelToner="
 				+ tonerObj.getNivelToner() + ", nivelKit=" + kitManutecao.getNivelKit() + ", nivelUnidade=" + unidade.getNivelUnidade() + ", url=" + url
 				+ ", cssNivel=" + estilo.getCssNivel() + ", cssKit=" + estilo.getCssKit() + ", cssUnidade=" + estilo.getCssUnidade() + ", cssName=" + estilo.getCssName()
 				+ ", serial=" + serial + ", corToner=" + tonerObj.getCorToner() + ", pagRestantesToner=" + tonerObj.getPagRestantesToner()
@@ -319,5 +324,6 @@ public class Printer implements Comparable<Printer>{
 				
 			}
 		}
+	
 	
 }
