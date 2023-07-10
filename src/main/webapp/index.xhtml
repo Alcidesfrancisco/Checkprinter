@@ -20,6 +20,7 @@
 		<title>CheckPrinter 1.0</title>
 	</h:head>
 	<body>
+	
 		<center>
 		<div class="page-header">
 			<h1>Monitoramento das Impressoras corporativas do CAV 
@@ -40,7 +41,7 @@
 						<f:facet name="header">
 							Impressora
 						</f:facet>
-						<span class="#{printer.cssName}" >#{printer.name.replaceAll('_',' ')} - <a href="#{printer.url}" target="_blank">#{printer.url}</a> - #{printer.status}
+						<span class="#{printer.cssName}" >#{printer.name.replaceAll('_',' ')} - <a href="#{printer.url}"  target="_blank">#{printer.url} </a> - #{printer.status}
 						<br />
 						#{printer.marca} &nbsp;  #{printer.modelo} - <span class="badge badge-pill badge-dark" title="Serial da impressora">#{printer.serial}</span>
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary" style="color: white; margin-left: 20px; text-align: right;" title="Total de impressões ">
@@ -48,6 +49,32 @@
 						    <span class="visually-hidden"></span>
 						  </span>
 						</span>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#graficoModal#{printer.name}">
+							<f:param name="printer" value="#{printer}" />
+						 Gráficos
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="graficoModal#{printer.name}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">#{printer.name}</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						       <div class="embed-responsive embed-responsive-16by9">
+								  <iframe class="embed-responsive-item" src="/CheckPrinter/charts.html?printer=#{printer.serial}"></iframe>
+								</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 						
 					</h:column>
 					<h:column>
@@ -57,7 +84,7 @@
 						</f:facet>
 						<div class="progress">
 						  <div class="#{printer.cssNivel}" role="progressbar" aria-valuenow="#{printer.nivelToner}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelToner}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner">
-						    #{index.nivelTonerToString(printer.nivelToner)}
+						    #{index.nivelToString(printer.nivelToner)}
 						  </div>
 						  
 						</div>
@@ -70,7 +97,7 @@
 						#{index.printerConverter(printer)}
 							<div class="progress">
 							  <div class="#{index.cx.cssNivelTonerCyan}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerCyan}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerCyan}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Cyan">
-							    #{index.cx.nivelTonerCyan}%
+							    #{index.nivelToString(index.cx.nivelTonerCyan)}
 							  </div>
 						  
 						  </div>
@@ -81,7 +108,7 @@
 						
 						<div class="progress">
 							  <div class="#{index.cx.cssNiveltonerMagenta}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerMagenta}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerMagenta}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Magenta">
-							    #{index.cx.nivelTonerMagenta}%
+							    #{index.nivelToString(index.cx.nivelTonerMagenta)}
 							  </div>
 						  
 						  </div>
@@ -94,7 +121,7 @@
 						
 						<div class="progress">
 							  <div class="#{index.cx.cssNiveltonerYellow}" role="progressbar" aria-valuenow="#{index.cx.nivelTonerYellow}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelTonerYellow}%;" data-toggle="tooltip" data-placement="top" title="Nível do toner Yellow">
-							    #{index.cx.nivelTonerYellow}%
+							    #{index.nivelToString(index.cx.nivelTonerYellow)}
 							  </div>
 						  
 						  </div>
@@ -110,7 +137,7 @@
 						</f:facet>
 						<div class="progress" title="Nível da Unidade de Imagem">
 						  <div class="#{printer.cssUnidade}" role="progressbar" aria-valuenow="#{printer.nivelUnidade}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelUnidade}%;">
-						    #{printer.nivelUnidade}%
+						    #{index.nivelToString(printer.nivelUnidade)}
 						  </div>
 						  
 						 </div>
@@ -125,7 +152,7 @@
 						  
 						   <div class="progress" title="N´vem da Unidade de Imagem">
 							  <div class="#{index.cx.cssUnidadeCMY}" role="progressbar" aria-valuenow="#{index.cx.nivelUnidadeCMY}" aria-valuemin="0" aria-valuemax="100" style="width:  #{index.cx.nivelUnidadeCMY}%;">
-							    #{index.cx.nivelUnidadeCMY}%
+							    #{index.nivelToString(index.cx.nivelUnidadeCMY)}
 							  </div>
 						    </div>
 						  
@@ -140,15 +167,16 @@
 						<f:facet name="header">
 							Kit manutenção
 						</f:facet>
-						<div class="progress" title="nível kit">
-						  <div class="#{printer.cssKit}" role="progressbar" aria-valuenow="#{printer.nivelKit}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelKit}%;">
-						    #{printer.nivelKit}%
-						  </div>
-						</div>
-						<span class="badge badge-primary" title="Páginas restantes">#{printer.pagRestantesKit}</span>
-						<span class="badge badge-pill badge-dark" title="Serial Kit">#{printer.serialKit}</span>
-						<span class="#{printer.cssStatusKit}" title="Status kit">#{printer.statuskit}</span>
-												
+						<h:panelGrid width="100%" pt:style="padding:0" rendered="#{printer.modelo != 'CX725'}">
+							<div class="progress" title="nível kit">
+							  <div class="#{printer.cssKit}" role="progressbar" aria-valuenow="#{printer.nivelKit}" aria-valuemin="0" aria-valuemax="100" style="width:  #{printer.nivelKit}%;">
+							    #{index.nivelToString(printer.nivelKit)}
+							  </div>
+							</div>
+							<span class="badge badge-primary" title="Páginas restantes">#{printer.pagRestantesKit}</span>
+							<span class="badge badge-pill badge-dark" title="Serial Kit">#{printer.serialKit}</span>
+							<span class="#{printer.cssStatusKit}" title="Status kit">#{printer.statuskit}</span>
+						</h:panelGrid>			
 					</h:column>
 					
 				</h:dataTable>
@@ -185,5 +213,10 @@
 			</center>
 		</div>
 </body>
+<!-- Button trigger modal -->
+
+
+
+
 
 </html>

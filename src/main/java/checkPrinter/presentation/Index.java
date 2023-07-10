@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import org.json.simple.parser.ParseException;
 
@@ -24,6 +25,7 @@ import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
 @ManagedBean
+@SessionScoped
 public class Index{
 
 	private List<Printer> printers;
@@ -123,7 +125,8 @@ public class Index{
 	public void setErros(List<String> erros) {
 		this.erros = erros;
 	}
-	public String nivelTonerToString(Integer nivelToner) {
+	public String nivelToString(Integer nivelToner) {
+		
 		return nivelToner.toString() + "%";
 	}
 	public void  loadFile()

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		 <meta charset="UTF-8">
+		
+	</head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<body>
+		<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+		
+		<script type="aplication/json" src="printers.json">
+			const res = await fetch("printers.json");
+			const data = await res.json();
+			console.log(data);
+					</script>
+		
+		<script>
+			const urlParams = new URLSearchParams(window.location.search);
+			const serial = urlParams.get("printer");
+			const res = await fetch("printers.json");
+			const data = await res.json();
+			console.log(data);
+			
+			
+		const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
+		
+		new Chart("myChart", {
+		  type: "line",
+		 
+		  data: {
+		    labels: xValues,
+		    datasets: [{ 
+		      data: [100,100,98,97,90,70,69,69,50,40],
+		      borderColor: "blue",
+		      fill: false,
+		      label: "Toner"
+		    }, { 
+		      data: [100,70,70,60,50,40,40,30,20,10],
+		      borderColor: "green",
+		      fill: false,
+		      label: "Unidade de Imagem"
+		    }, { 
+		      data: [100,100,100,100,100,99,99,99,95, 30],
+		      borderColor: "red",
+		      fill: false,
+		      label: "Kit"
+		      
+		    }]
+		  },
+		  options: {
+		    legend: {position: 'top'},
+			   
+		  }
+		});
+		</script>
+		#{charts.teste}
+		
+	</body>
+</html>
