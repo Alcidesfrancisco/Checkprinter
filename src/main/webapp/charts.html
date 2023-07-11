@@ -12,30 +12,44 @@
 		
 		
 		<script>
-			
+			class Toner{
+    constructor(tonerJson){
+        this.serial = tonerJson.serial;
+		//this.printer = ;
+		this. dias = dias;
+		this. consumo = consumo;         
+        }
+
+
+}
 			
 			
 			var getJson = async function (){
-				var printer = null;
+				var toner = null;
+				var xValues = []; 
+				var dados = [];
 				const urlParams = new URLSearchParams(window.location.search);
 				//const serial = urlParams.get("printer");
-				const serial =  '7018840002TB3';
-				const res = await fetch("printers.json");
+				const serial =  'CAB220392B04';
+				const res = await fetch("logSupplies.json");
 				const data = await res.json();
-				console.log(data);
-				data.Printers.forEach(e =>{
-					if(e.serial === serial){
-						printer = e;
+				//console.log(data);
+				
+					console.log(data.Toners);
+					data.Toners.forEach(t=> {
+						console.log(t.consumo);
+						xValues = t.dias;
+						dados = t.consumo;
+					});
+					var toner = null;
+				
 						
-					}
-				});
-						
 			
-			console.log(printer);
+			console.log(toner);
 			
 			
 			
-		const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
+		//const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
 		
 		new Chart("myChart", {
 		  type: "line",
@@ -43,21 +57,10 @@
 		  data: {
 		    labels: xValues,
 		    datasets: [{ 
-		      data: [100,100,98,97,90,70,69,69,50,40],
+		      data: dados,
 		      borderColor: "blue",
 		      fill: false,
 		      label: "Toner"
-		    }, { 
-		      data: [100,70,70,60,50,40,40,30,20,10],
-		      borderColor: "green",
-		      fill: false,
-		      label: "Unidade de Imagem"
-		    }, { 
-		      data: [100,100,100,100,100,99,99,99,95, 30],
-		      borderColor: "red",
-		      fill: false,
-		      label: "Kit"
-		      
 		    }]
 		  },
 		  options: {
