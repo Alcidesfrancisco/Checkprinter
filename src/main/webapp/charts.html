@@ -8,18 +8,31 @@
 	<body>
 		<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 		
-		<script type="aplication/json" src="printers.json">
-			const res = await fetch("printers.json");
-			const data = await res.json();
-			console.log(data);
-					</script>
+		
+		
 		
 		<script>
-			const urlParams = new URLSearchParams(window.location.search);
-			const serial = urlParams.get("printer");
-			const res = await fetch("printers.json");
-			const data = await res.json();
-			console.log(data);
+			
+			
+			
+			var getJson = async function (){
+				var printer = null;
+				const urlParams = new URLSearchParams(window.location.search);
+				//const serial = urlParams.get("printer");
+				const serial =  '7018840002TB3';
+				const res = await fetch("printers.json");
+				const data = await res.json();
+				console.log(data);
+				data.Printers.forEach(e =>{
+					if(e.serial === serial){
+						printer = e;
+						
+					}
+				});
+						
+			
+			console.log(printer);
+			
 			
 			
 		const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
@@ -52,8 +65,10 @@
 			   
 		  }
 		});
+		}
+		getJson();
 		</script>
-		#{charts.teste}
+		
 		
 	</body>
 </html>

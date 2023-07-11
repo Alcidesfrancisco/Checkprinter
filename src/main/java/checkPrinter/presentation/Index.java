@@ -25,7 +25,6 @@ import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
 @ManagedBean
-@SessionScoped
 public class Index{
 
 	private List<Printer> printers;
