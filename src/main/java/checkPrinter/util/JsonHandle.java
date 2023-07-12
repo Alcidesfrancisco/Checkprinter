@@ -22,12 +22,15 @@ import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.internal.StringMap;
 import com.google.gson.reflect.TypeToken;
 
 import checkPrinter.business.Cx725;
 import checkPrinter.business.Mx622;
 import checkPrinter.business.Mx910;
 import checkPrinter.business.Printer;
+import checkPrinter.business.Supplies;
+import checkPrinter.business.Supply;
 
 public class JsonHandle {
 
@@ -39,15 +42,16 @@ public class JsonHandle {
 		try { 
 
 			//jh.EscreverJsonPrinters(jh.carregaGson());
-			jh.carregaJson(arquivoJson);
-
+			//jh.carregaJsonPrinters(arquivoJson);
+			Supplies supplies = jh.carregaJsonSupplies(System.getProperty("user.dir") + "\\src\\main\\webapp\\supplies.json");
+			//jh.EscreverJsonSupplies(supplies);
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	public List<Printer> carregaJson(String path) throws IOException, ParseException {
+	public List<Printer> carregaJsonPrinters(String path) throws IOException, ParseException {
 
 		Gson gson = new Gson();
 		TypeToken<HashMap<String,  List<Printer>>> tt = new TypeToken<HashMap<String,  List<Printer>>>() {};
@@ -60,6 +64,7 @@ public class JsonHandle {
 		JsonElement je = gson.toJsonTree(json);
 
 		HashMap<String, List<Printer>> listPrinters = gson.fromJson(je.getAsString(), tt.getType());
+		fileReader.close();
 		reader.close();
 		return listPrinters.get("Printers");
 
@@ -77,12 +82,44 @@ public class JsonHandle {
 
 		writeFile.close();
 	}	
+	public Supplies carregaJsonSupplies(String path) throws IOException, ParseException {
 
+		Gson gson = new Gson();
+		TypeToken<Object> tt = new TypeToken<Object>() {};
+		File file = new File(path);
+		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
+		
+		
+		StringMap<Object> supplies = gson.fromJson(fileReader, tt.getType());
+		
+		
+		ArrayList<Supply> toners = (ArrayList<Supply>) supplies.get("toners");
+		ArrayList<Supply> unidades = (ArrayList<Supply>) supplies.get("unidades");
+		ArrayList<Supply> kits = (ArrayList<Supply>) supplies.get("kits");
+		Supplies s = new Supplies(toners, unidades, kits);
+		
+		System.out.println(s);		
+		fileReader.close();
+		return s;
+
+	}
+	public void EscreverJsonSupplies(Supplies supplies) throws IOException {
+		
+		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
+				"\\src\\main\\webapp\\supplies.json");
+		Gson gson = new Gson();
+
+		//HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
+		//map.put("Printers", printers);
+		writeFile.write(gson.toJson( supplies));
+
+		writeFile.close();
+	}	
 	public Printer getPrinterJson(Printer printer){
 
 		List<Printer> lista;
 		try {
-			lista = this.carregaJson(System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json");
+			lista = this.carregaJsonPrinters(System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json");
 
 
 			for( Printer p : lista) {
@@ -134,4 +171,5 @@ public class JsonHandle {
 		}
 		return printers;
 	}	 
+	
 }

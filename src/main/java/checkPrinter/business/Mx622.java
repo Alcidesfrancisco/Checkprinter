@@ -25,7 +25,7 @@ public class Mx622 extends Printer implements Runnable{
 		try {
 
 			URL url = new URL(this.getUrl() + "/webglue/rawcontent?timedRefresh=1&c=Status&lang=en");
-			if(this.getName().equals("NATI")) System.out.println(this);
+			
 			JSONParser parser = new JSONParser();
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setReadTimeout(1000);
@@ -73,8 +73,7 @@ public class Mx622 extends Printer implements Runnable{
 			
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
-			if(this.getName().equals("NATI")) System.out.println(this);
-			
+						
 		} 
 	}
 

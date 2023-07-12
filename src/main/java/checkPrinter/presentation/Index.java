@@ -21,6 +21,7 @@ import checkPrinter.business.Mx622;
 import checkPrinter.business.Mx910;
 import checkPrinter.business.Ocorrencia;
 import checkPrinter.business.Printer;
+import checkPrinter.business.Supplies;
 import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
@@ -51,7 +52,7 @@ public class Index{
 		if(new File (arquivoJson).exists()) {
 			
 			try {
-				List<Printer> printersTemp = jh.carregaJson(arquivoJson);
+				List<Printer> printersTemp = jh.carregaJsonPrinters(arquivoJson);
 				if(printersTemp.size() == 0) throw new IOException();
 				
 				for (Printer p : printersTemp) {
@@ -171,12 +172,13 @@ public class Index{
 			reader.close();
 			TimeUnit.SECONDS.sleep(2);
 			Collections.sort(printers);
-			
+			gravarLog();
 			for (Printer p : printers) {
 				
 				Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "Impressora Carregada", "impressora", new Date());
 				p.getOcorrencias().add(ocorrencia);
 				enviarMensagemZap(p);
+				
 			}
 			JsonHandle jh = new JsonHandle();
 			jh.EscreverJsonPrinters(printers);
@@ -215,6 +217,19 @@ public class Index{
 		}
 		
 	}
+	public void gravarLog() {
+		JsonHandle jh = new JsonHandle();
+		String path = System.getProperty("user.dir") + "\\src\\main\\webapp\\logSupplies.json";
+		
+		try {
+			Supplies supplies = jh.carregaJsonSupplies(path);
+			System.out.println(supplies);
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	private Cx725 cx;
 	public Cx725 getCx() {
@@ -230,7 +245,4 @@ public class Index{
 			cx =  cx725;
 		}
 	}
-	//TODO localizar JS de estat�sticas : http://150.161.80.19/#/Settings/Reports/ReportDeviceGroup
-
-
 }

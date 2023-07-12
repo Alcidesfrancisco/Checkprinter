@@ -5,11 +5,13 @@ C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Cx725.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Estilo.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\UnidadeDeImagem.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\BusinessException.java
+C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Supply.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Mx622.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\controller\OccorrenciaController.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\util\EnviarZap.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Toner.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Printer.java
+C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Supplies.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\KitManutecao.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\business\Ocorrencia.java
 C:\Users\alcid\git\Checkprinter\src\main\java\checkPrinter\persistence\EntityDao.java
