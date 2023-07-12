@@ -98,6 +98,8 @@ public class Index{
 						obj.setCssStatusToner(obj.aplicarCssStatus(obj.getStatusToner()));
 						obj.setCssStatusUnidade(obj.aplicarCssStatus(obj.getStatusUnidade()));
 						obj.setCssStatusKit(obj.aplicarCssStatus(obj.getStatuskit()));
+						obj.setStatus("OffLine");
+						obj.setCssName("list-group-item list-group-item-danger");
 						printers.set(printers.indexOf(printer), obj);
 					}
 				}

@@ -3,6 +3,7 @@ package checkPrinter.business;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -24,12 +25,12 @@ public class Mx622 extends Printer implements Runnable{
 		try {
 
 			URL url = new URL(this.getUrl() + "/webglue/rawcontent?timedRefresh=1&c=Status&lang=en");
-
+			if(this.getName().equals("NATI")) System.out.println(this);
 			JSONParser parser = new JSONParser();
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setReadTimeout(1000);
 			conn.setConnectTimeout(1000);
-
+			
 			if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
 			{
 
@@ -57,6 +58,7 @@ public class Mx622 extends Printer implements Runnable{
 				this.setStatuskit(kit.get("currentStatus").toString());
 				this.setPagRestantesKit(Integer.parseInt(kit.get("pagesRemaining").toString()));
 				this.setSerialKit(kit.get("serialNumber").toString());
+				this.setStatus("Online");
 			}else {
 				
 				this.setStatus("Offline");
@@ -68,22 +70,27 @@ public class Mx622 extends Printer implements Runnable{
 			aplicarCss();
 			this.setEstatisticasPrinter();
 		}catch(IOException | ParseException e){
+			
 			this.setStatus("Offline");
 			this.setCssName("list-group-item list-group-item-danger");
+			if(this.getName().equals("NATI")) System.out.println(this);
 			
 		} 
 	}
 
 	public void aplicarCss() {
 		try {
-			this.setCssNivelToner(aplicarCssNivel(this.getNivelToner()));
-			this.setCssNivelKit(aplicarCssNivel(this.getNivelKit()));
-			this.setCssUnidade(aplicarCssNivel(this.getNivelUnidade()));
-			this.setCssStatusToner(aplicarCssStatus(this.getStatusToner()));
-			this.setCssStatusUnidade(aplicarCssStatus(this.getStatusUnidade()));
-			this.setCssStatusKit(aplicarCssStatus(this.getStatuskit()));
+			
+			  this.setCssNivelToner(aplicarCssNivel(this.getNivelToner()));
+			  this.setCssNivelKit(aplicarCssNivel(this.getNivelKit()));
+			  this.setCssUnidade(aplicarCssNivel(this.getNivelUnidade()));
+			  this.setCssStatusToner(aplicarCssStatus(this.getStatusToner()));
+			  this.setCssStatusUnidade(aplicarCssStatus(this.getStatusUnidade()));
+			  this.setCssStatusKit(aplicarCssStatus(this.getStatuskit()));
+			 
 			this.setCssName("list-group-item list-group-item-success");
-			this.setStatus("Online");
+			
+			if(this.getStatus() != null) this.setStatus("Online");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

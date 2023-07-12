@@ -113,33 +113,29 @@ public class Mx910 extends Printer implements Runnable{
 		//this.setEstatisticasPrinter910();
 	}
 
-	public void setEstatisticasPrinterMX910() {
+	public void setEstatisticasPrinterMX910()  throws NumberFormatException, IOException{
 
 		URL url;
 		HttpURLConnection conn = null;
-		try {
-			url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
 
-			conn = (HttpURLConnection) url.openConnection();			
-			conn.setReadTimeout(3000); conn.setConnectTimeout(1000);
+		url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
 
-			if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
-			{
+		conn = (HttpURLConnection) url.openConnection();			
+		conn.setReadTimeout(3000); conn.setConnectTimeout(2000);
 
-				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-				String inputLine;
-				for (int i = 0; i < 205; i++) {
-					inputLine = in.readLine();
-					if(i == 204) {
-						this.totalImpressoes = Integer.parseInt(inputLine.split("</p></td><td><p> ")[1].split(" ")[0]);
-					}
-				} 
-			}
-			conn.disconnect();
-		} catch (NumberFormatException | IOException e) {
-			System.err.println(this.getName() + " OffLine");		
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
+		{
 
-
+			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String inputLine;
+			for (int i = 0; i < 205; i++) {
+				inputLine = in.readLine();
+				if(i == 204) {
+					this.totalImpressoes = Integer.parseInt(inputLine.split("</p></td><td><p> ")[1].split(" ")[0]);
+				}
+			} 
 		}
+		conn.disconnect();
+
 	}
 }

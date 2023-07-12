@@ -286,8 +286,6 @@ public class Printer implements Comparable<Printer>{
 		} catch (Exception e) {
 			return 0;
 		}
-
-
 	}
 
 	public Integer getTotalImpressoes() {
@@ -301,9 +299,6 @@ public class Printer implements Comparable<Printer>{
 	public void setEstatisticasPrinter() throws IOException {
 
 		URL url = new URL(this.getUrl() + "/webglue/getReport?name=PrintConfigHealthCheckStatistics&lang=en");
-
-
-
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setReadTimeout(1000);
 
@@ -321,7 +316,6 @@ public class Printer implements Comparable<Printer>{
 					this.totalImpressoes = Integer.parseInt(inputLine.split("</div></li><li><div")[13].split(">")[1]);
 					}
 				}
-				
 			}
 		}
 	
