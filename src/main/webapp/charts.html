@@ -6,11 +6,7 @@
 	</head>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<body>
-		<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-		
-		
-		
-		
+		<canvas id="myChart" style="width:100%;max-width:1140px"></canvas>
 		<script>
 
 			var getJson = async function (){
@@ -21,28 +17,24 @@
 				let kit = [];
 				const urlParams = new URLSearchParams(window.location.search);
 				const serial = urlParams.get("printer");
-				//const serial =  'CAB220392B04';
+				//const serial =  'CAB220392B04'; //teste stand-alone
 				const res = await fetch("logSupplies.json");
 				const data = await res.json();
-				//console.log(serial);
+				//console.log(data.Toners);
+				//console.log(data.Toners.length);
 				
-					data.Toners.forEach(t=> {
-						console.log(t.printer === serial);
-						if(t.printer === serial){
-							xValues = t.dias;
-							toner = t.consumo;
-						}
-					});
-					data.Unidades.forEach(u=> {
-						if(u.printer === serial){
-							unidade = u.consumo;
-						}
-					});
-					data.Kits.forEach(k=> {
-						if(k.printer === serial){
-							kit = k.consumo;
-						}
-					});
+				let t = data.Toners;
+				let u = data.Unidades;
+				let k = data.Kits;
+				for(let i = 0; i < t.length; i = i + 1){
+					
+					if(t[i].printer === serial){
+						xValues = t[i].dias;
+						toner = t[i].consumo;						
+						unidade = u[i].consumo;						
+						kit = k[i].consumo;
+					}
+				}
 			
 		//const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
 		
