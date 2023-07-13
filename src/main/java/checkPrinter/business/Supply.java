@@ -2,14 +2,25 @@ package checkPrinter.business;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import checkPrinter.util.DateConverter;
 
 public class Supply {
 	private String serial;
 	private String printer;
-	private Integer[] consumo;
-	private String[] dias;
-	private String ultimaData;
+	private List<Integer> consumo;
+	private List<String> dias;
+	private String ultimaData = DateConverter.dateToString(new Date());
 	
+	public Supply(String serial, String printer, List<Integer> consumo, List<String> dias, String ultimaData) {
+		super();
+		this.serial = serial;
+		this.printer = printer;
+		this.consumo = consumo;
+		this.dias = dias;
+		this.ultimaData = ultimaData;
+	}
 	public String getUltimaData() {
 		return ultimaData;
 	}public void setUltimaData(String ultimaData) {
@@ -27,24 +38,28 @@ public class Supply {
 	public void setPrinter(String printer) {
 		this.printer = printer;
 	}
-	public Integer[] getConsumo() {
+	public List<Integer> getConsumo() {
 		return consumo;
 	}
-	public void setConsumo(Integer[] consumo) {
+	public void setConsumo(List<Integer> consumo) {
 		this.consumo = consumo;
 	}
-	public String[] getDias() {
+	public List<String> getDias() {
 		return dias;
 	}
-	public void setDias(String[] dias) {
+	public void setDias(List<String> dias) {
 		this.dias = dias;
 	}
-	@Override
+		
+	 @Override
 	public String toString() {
-		return "Supply [serial=" + serial + ", printer=" + printer + ", consumo=" + Arrays.toString(consumo) + ", dias="
-				+ Arrays.toString(dias) +"]"+" ultima data= "+ ultimaData;
+		return "Supply [serial=" + serial + ", printer=" + printer + ", consumo=" + consumo + ", dias=" + dias
+				+ ", ultimaData=" + ultimaData + "]";
 	}
-	 
+	public boolean equals(Supply obj) {
+		// TODO Auto-generated method stub
+		return this.serial.equals(obj.getSerial());
+	}
 	
 
 }

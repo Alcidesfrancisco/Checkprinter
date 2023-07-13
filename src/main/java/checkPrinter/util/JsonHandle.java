@@ -34,7 +34,11 @@ import checkPrinter.business.Supply;
 
 public class JsonHandle {
 
-	public static String arquivoJson = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json";
+	private static final String ARQUIVO_TXT_PRINTERS_JSON = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.txt";
+	private static final String ARQUIVO_SUPPLIES_JSON = System.getProperty("user.dir") + "\\src\\main\\webapp\\logSupplies.json";
+	private static final String ARQUIVO_PRINTERS_JSON = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json";
+	
+	
 	public static void main(String[] args) {
 
 
@@ -43,7 +47,8 @@ public class JsonHandle {
 
 			//jh.EscreverJsonPrinters(jh.carregaGson());
 			//jh.carregaJsonPrinters(arquivoJson);
-			Supplies supplies = jh.carregaJsonSupplies(System.getProperty("user.dir") + "\\src\\main\\webapp\\supplies.json");
+			Supplies supplies = jh.carregaJsonSupplies();
+			//System.out.println(supplies.getToners().get(0));
 			jh.EscreverJsonSupplies(supplies);
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
@@ -51,11 +56,11 @@ public class JsonHandle {
 		}
 
 	}
-	public List<Printer> carregaJsonPrinters(String path) throws IOException, ParseException {
+	public List<Printer> carregaJsonPrinters() throws IOException, ParseException {
 
 		Gson gson = new Gson();
 		TypeToken<HashMap<String,  List<Printer>>> tt = new TypeToken<HashMap<String,  List<Printer>>>() {};
-		File file = new File(path);
+		File file = new File(ARQUIVO_PRINTERS_JSON);
 		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
 		BufferedReader reader = new BufferedReader(fileReader);
 
@@ -72,8 +77,7 @@ public class JsonHandle {
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
 	
-		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
-				"\\src\\main\\webapp\\printers.json");
+		FileWriter writeFile = new FileWriter(ARQUIVO_PRINTERS_JSON);
 		Gson gson = new Gson();
 
 		HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
@@ -82,11 +86,11 @@ public class JsonHandle {
 
 		writeFile.close();
 	}	
-	public Supplies carregaJsonSupplies(String path) throws IOException, ParseException {
+	public Supplies carregaJsonSupplies() throws IOException, ParseException {
 
 		Gson gson = new Gson();
 		TypeToken<Object> tt = new TypeToken<Object>() {};
-		File file = new File(path);
+		File file = new File(ARQUIVO_SUPPLIES_JSON);
 		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
 		
 		
@@ -98,15 +102,14 @@ public class JsonHandle {
 		ArrayList<Supply> kits = (ArrayList<Supply>) supplies.get("kits");
 		Supplies s = new Supplies(toners, unidades, kits);
 		
-		System.out.println(s);		
+		
 		fileReader.close();
 		return s;
 
 	}
 	public void EscreverJsonSupplies(Supplies supplies) throws IOException {
 		
-		FileWriter writeFile = new FileWriter(System.getProperty("user.dir") + 
-				"\\src\\main\\webapp\\supplies.json");
+		FileWriter writeFile = new FileWriter(ARQUIVO_SUPPLIES_JSON);
 		Gson gson = new Gson();
 
 		//HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
@@ -119,7 +122,7 @@ public class JsonHandle {
 
 		List<Printer> lista;
 		try {
-			lista = this.carregaJsonPrinters(System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json");
+			lista = this.carregaJsonPrinters();
 
 
 			for( Printer p : lista) {
@@ -143,8 +146,7 @@ public class JsonHandle {
 			File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //
 			//para Server
 
-			if(!file.exists()) { file = new File(System.getProperty("user.dir") +
-					"\\src\\main\\webapp\\printers.txt"); //para localHost }
+			if(!file.exists()) { file = new File(ARQUIVO_TXT_PRINTERS_JSON); //para localHost }
 
 			InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8"); 
 			BufferedReader reader = new BufferedReader(fileReader); String dados = null;

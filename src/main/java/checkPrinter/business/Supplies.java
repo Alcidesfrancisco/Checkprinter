@@ -6,7 +6,6 @@ public class Supplies {
 	private ArrayList<Supply> toners;
 	private ArrayList<Supply> unidades;
 	private ArrayList<Supply> kits;
-	private String ultimoDiaInformado;
 	
 	public Supplies(ArrayList<Supply> toners, ArrayList<Supply> unidades, ArrayList<Supply> kits) {
 		super();
@@ -21,12 +20,6 @@ public class Supplies {
 		return "Supplies [toners=" + toners + ", unidades=" + unidades + ", kits=" + kits + "]";
 	}
 
-	public String getUltimoDiaInformado() {
-		return ultimoDiaInformado;
-	}
-	public void setUltimoDiaInformado(String ultimoDiaInformado) {
-		this.ultimoDiaInformado = ultimoDiaInformado;
-	}
 	public ArrayList<Supply> getToners() {
 		return toners;
 	}

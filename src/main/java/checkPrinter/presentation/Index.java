@@ -22,6 +22,8 @@ import checkPrinter.business.Mx910;
 import checkPrinter.business.Ocorrencia;
 import checkPrinter.business.Printer;
 import checkPrinter.business.Supplies;
+import checkPrinter.business.Supply;
+import checkPrinter.util.DateConverter;
 import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
@@ -52,7 +54,7 @@ public class Index{
 		if(new File (arquivoJson).exists()) {
 			
 			try {
-				List<Printer> printersTemp = jh.carregaJsonPrinters(arquivoJson);
+				List<Printer> printersTemp = jh.carregaJsonPrinters();
 				if(printersTemp.size() == 0) throw new IOException();
 				
 				for (Printer p : printersTemp) {
@@ -101,6 +103,8 @@ public class Index{
 						obj.setCssStatusKit(obj.aplicarCssStatus(obj.getStatuskit()));
 						obj.setStatus("OffLine");
 						obj.setCssName("list-group-item list-group-item-danger");
+						gravarLog(obj);
+						
 						printers.set(printers.indexOf(printer), obj);
 					}
 				}
@@ -112,6 +116,9 @@ public class Index{
 				//e.printStackTrace();
 			} catch (InterruptedException e) {
 				System.out.println("Erro no Index");
+				e.printStackTrace();
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else {
@@ -172,7 +179,7 @@ public class Index{
 			reader.close();
 			TimeUnit.SECONDS.sleep(2);
 			Collections.sort(printers);
-			gravarLog();
+			
 			for (Printer p : printers) {
 				
 				Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "Impressora Carregada", "impressora", new Date());
@@ -182,7 +189,7 @@ public class Index{
 			}
 			JsonHandle jh = new JsonHandle();
 			jh.EscreverJsonPrinters(printers);
-		} catch (IOException | InterruptedException e) {
+		} catch (IOException | InterruptedException  e) {
 			erros.add(e.toString());
 			e.printStackTrace();
 		}
@@ -217,20 +224,77 @@ public class Index{
 		}
 		
 	}
-	public void gravarLog() {
+	public void gravarLog(Printer p) throws IOException, ParseException, java.text.ParseException {
 		JsonHandle jh = new JsonHandle();
-		String path = System.getProperty("user.dir") + "\\src\\main\\webapp\\logSupplies.json";
+		List<Integer> consumo = new ArrayList<Integer>() ;
+		List<String> dias = new ArrayList<String>();
+		consumo.add(p.getNivelToner());
+		dias.add(DateConverter.dateToString(DateConverter.getHoje()));
+		Supply toner = new Supply(
+				p.getSerialToner(), 
+				p.getSerial(), 
+				consumo, 
+				dias, 
+				DateConverter.dateToString(DateConverter.getHoje()));
+		Supply unidade = new Supply(
+				p.getSerialUnidade(), 
+				p.getSerial(), 
+				null, 
+				null, 
+				DateConverter.dateToString(DateConverter.getHoje()));
+		Supply kit = new Supply(p.getSerialKit(), 
+				p.getSerial(), 
+				null, 
+				null, 
+				DateConverter.dateToString(DateConverter.getHoje()));
 		
-		try {
-			Supplies supplies = jh.carregaJsonSupplies(path);
-			System.out.println(supplies);
-		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		Supplies supplies = jh.carregaJsonSupplies();
+		//ArrayList<Supply> toners = supplies.getToners();
+		if(contemSupply(supplies.getToners(), toner)) {
+			// adicionar ao existente
+			System.out.println("Contem toner");
+		}else {
+			System.err.println("adiciona toner");
+			supplies.getToners().add(toner);
+		}
+		if(contemSupply(supplies.getUnidades(), unidade)) {
+			// adicionar ao existente
+		}else {
+			supplies.getUnidades().add(unidade);
+		}
+		if(contemSupply(supplies.getKits(), kit)) {
+			// adicionar ao existente
+		}else {
+			supplies.getKits().add(kit);
 		}
 		
+		/*
+		 * for (int i = 0; i < toners.size(); i++) {
+		 * 
+		 * 
+		 * if(DateConverter.stringToDate(toners.get(i).getUltimaData()).after(
+		 * DateConverter.getHoje())) {
+		 * if(toners.get(i).getSerial().equals(p.getSerial())) {
+		 * 
+		 * } } }
+		 */
+			
+		
+		System.out.println(supplies);
+		System.out.println(supplies.getToners().size());
+		System.out.println(supplies.getUnidades().size());
+		System.out.println(supplies.getKits().size());
+		jh.EscreverJsonSupplies(supplies);
 	}
 	
+	private boolean contemSupply(ArrayList<Supply> supllies, Supply toner) {
+		
+		for (Supply supply : supllies) {
+			return supply.getSerial().equals(toner.getSerial());
+		}
+		return false;
+	}
+
 	private Cx725 cx;
 	public Cx725 getCx() {
 		return cx;
