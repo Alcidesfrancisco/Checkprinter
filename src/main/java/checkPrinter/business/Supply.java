@@ -8,8 +8,13 @@ public class Supply {
 	private String printer;
 	private Integer[] consumo;
 	private String[] dias;
+	private String ultimaData;
 	
-	
+	public String getUltimaData() {
+		return ultimaData;
+	}public void setUltimaData(String ultimaData) {
+		this.ultimaData = ultimaData;
+	}
 	public String getSerial() {
 		return serial;
 	}
@@ -37,7 +42,7 @@ public class Supply {
 	@Override
 	public String toString() {
 		return "Supply [serial=" + serial + ", printer=" + printer + ", consumo=" + Arrays.toString(consumo) + ", dias="
-				+ Arrays.toString(dias) + "]";
+				+ Arrays.toString(dias) +"]"+" ultima data= "+ ultimaData;
 	}
 	 
 	

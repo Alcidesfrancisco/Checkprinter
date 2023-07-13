@@ -44,7 +44,7 @@ public class JsonHandle {
 			//jh.EscreverJsonPrinters(jh.carregaGson());
 			//jh.carregaJsonPrinters(arquivoJson);
 			Supplies supplies = jh.carregaJsonSupplies(System.getProperty("user.dir") + "\\src\\main\\webapp\\supplies.json");
-			//jh.EscreverJsonSupplies(supplies);
+			jh.EscreverJsonSupplies(supplies);
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
