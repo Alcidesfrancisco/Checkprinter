@@ -10,14 +10,14 @@ import checkPrinter.util.DateConverter;
 public class Supply {
 	private String serial;
 	private String printer;
-	private List<Integer> consumo;
-	private List<String> dias;
+	private ArrayList<Integer> consumo;
+	private ArrayList<String> dias;
 	private String ultimaData = DateConverter.dateToString(new Date());
 	
 	
 	
 	
-	public Supply(String serial, String printer, List<Integer> consumo, List<String> dias, String ultimaData) {
+	public Supply(String serial, String printer, ArrayList<Integer> consumo, ArrayList<String> dias, String ultimaData) {
 		super();
 		this.serial = serial;
 		this.printer = printer;
@@ -45,13 +45,13 @@ public class Supply {
 	public List<Integer> getConsumo() {
 		return consumo;
 	}
-	public void setConsumo(List<Integer> consumo) {
+	public void setConsumo(ArrayList<Integer> consumo) {
 		this.consumo = consumo;
 	}
 	public List<String> getDias() {
 		return dias;
 	}
-	public void setDias(List<String> dias) {
+	public void setDias(ArrayList<String> dias) {
 		this.dias = dias;
 	}
 		
