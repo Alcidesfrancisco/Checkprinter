@@ -121,7 +121,7 @@ public class Mx910 extends Printer implements Runnable{
 		url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
 
 		conn = (HttpURLConnection) url.openConnection();			
-		conn.setReadTimeout(3000); conn.setConnectTimeout(2000);
+		conn.setReadTimeout(5000); conn.setConnectTimeout(5000);
 
 		if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
 		{

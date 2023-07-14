@@ -7,6 +7,12 @@ public class Supplies {
 	private ArrayList<Supply> unidades;
 	private ArrayList<Supply> kits;
 	
+	public Supplies() {
+		super();
+		this.toners = new ArrayList<Supply>();
+		this.unidades = new ArrayList<Supply>();
+		this.kits = new ArrayList<Supply>();
+	}
 	public Supplies(ArrayList<Supply> toners, ArrayList<Supply> unidades, ArrayList<Supply> kits) {
 		super();
 		this.toners = toners;
@@ -48,7 +54,18 @@ public class Supplies {
 	public void setKits(ArrayList<Supply> kits) {
 		this.kits = kits;
 	}
-
+	
+	
+	
+	public void addToner(Supply toner) {
+		this.toners.add(toner);
+	}
+	public void addUnidade(Supply unidade) {
+		this.unidades.add(unidade);
+	}
+	public void addKit(Supply kit) {
+		this.kits.add(kit);
+	}
 
 
 	

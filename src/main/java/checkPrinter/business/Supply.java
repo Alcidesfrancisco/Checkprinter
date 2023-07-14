@@ -1,5 +1,6 @@
 package checkPrinter.business;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,9 @@ public class Supply {
 	private List<Integer> consumo;
 	private List<String> dias;
 	private String ultimaData = DateConverter.dateToString(new Date());
+	
+	
+	
 	
 	public Supply(String serial, String printer, List<Integer> consumo, List<String> dias, String ultimaData) {
 		super();
@@ -54,11 +58,13 @@ public class Supply {
 	 @Override
 	public String toString() {
 		return "Supply [serial=" + serial + ", printer=" + printer + ", consumo=" + consumo + ", dias=" + dias
-				+ ", ultimaData=" + ultimaData + "]";
+				+ ", ultimaData=" + ultimaData + "]\n";
 	}
-	public boolean equals(Supply obj) {
-		// TODO Auto-generated method stub
-		return this.serial.equals(obj.getSerial());
+	public boolean equals(Object obj) {
+	
+			return this.serial.equals(((Supply)obj).getSerial());
+	
+		
 	}
 	
 
