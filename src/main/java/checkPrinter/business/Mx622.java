@@ -17,6 +17,7 @@ public class Mx622 extends Printer implements Runnable{
 		super(name, url, marca, modelo, serial);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void run() {
 
 		try {

@@ -6,15 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import checkPrinter.business.Cx725;
-import checkPrinter.business.Mx622;
-import checkPrinter.business.Mx910;
 import checkPrinter.business.Printer;
 
 public class Teste {
@@ -28,7 +24,7 @@ public class Teste {
 		String json = new Teste().carregarTXT();
 
 		//Define o TypeToken para a conversão string->objeto
-		TypeToken tt = new TypeToken<List<Printer>>() {
+		TypeToken<List<Printer>> tt = new TypeToken<List<Printer>>() {
 		};
 
 		//Biblioteca Gson: https://github.com/google/gson
@@ -45,7 +41,7 @@ public class Teste {
 
 
 	public String carregarTXT() throws IOException{
-		List<Printer> printers = new ArrayList<Printer>();
+		//List<Printer> printers = new ArrayList<Printer>();
 
 
 
@@ -58,10 +54,8 @@ public class Teste {
 		try {
 			fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		BufferedReader reader = new BufferedReader(fileReader);

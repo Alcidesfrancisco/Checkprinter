@@ -27,7 +27,7 @@ import checkPrinter.util.DateConverter;
 import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
-@ViewScoped
+@ManagedBean
 public class Index {
 
 	private List<Printer> printers;
@@ -46,11 +46,12 @@ public class Index {
 	}
 
 	public Index() {
-
+		
 		initPrinters();
 
 	}
 
+	@SuppressWarnings("serial")
 	private void initPrinters() {
 		printers = new ArrayList<Printer>();
 
@@ -65,8 +66,10 @@ public class Index {
 				for (Printer p : printersTemp) {
 					if (p.getModelo().contains("MX622") || p.getModelo().contains("MS622")) {
 						Mx622 mx622 = new Mx622(p.getName(), p.getUrl(), p.getMarca(), p.getModelo(), p.getSerial());
-						Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(), "impressora carregada do Json",
-								"impressora", new Date());
+						/*
+						 * Ocorrencia ocorrencia = new Ocorrencia(p.getSerial(),
+						 * "impressora carregada do Json", "impressora", new Date());
+						 */
 
 						// mx622.setOcorrencias(p.getOcorrencias());
 						// mx622.getOcorrencias().add(ocorrencia);
@@ -82,8 +85,8 @@ public class Index {
 								"impressora", new Date()));
 						Thread thread = new Thread(mx910);
 						thread.start();
-						mx910.setEstatisticasPrinterMX910();
 						printers.add(mx910);
+						mx910.setEstatisticasPrinterMX910();
 						enviarMensagemZap(p);
 
 					} else if (p.getModelo().contains("CX725")) {

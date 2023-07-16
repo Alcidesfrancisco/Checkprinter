@@ -275,6 +275,7 @@ public class Cx725 extends Printer implements Runnable{
 		this.serialTonerYellow = serialTonerYellow;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void run() {
 
 		 //Printer printer = new Printer("NATI", "http://150.161.80.20", "84sd6f68sd4f68");

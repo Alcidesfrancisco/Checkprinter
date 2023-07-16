@@ -69,6 +69,7 @@ public class JsonHandle {
 		return listPrinters.get("Printers");
 
 	}
+	@SuppressWarnings("unchecked")
 	public void lerJson() throws FileNotFoundException, IOException, ParseException {
 		
 		JSONObject jsonObject;
@@ -76,7 +77,7 @@ public class JsonHandle {
 		JSONParser parser = new JSONParser();
 		jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
 		
-		ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
+		//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
 		ArrayList<Supply> listaT = new ArrayList<Supply>();
 		ArrayList<Supply> listaU = new ArrayList<Supply>();
 		ArrayList<Supply> listaK = new ArrayList<Supply>();
@@ -104,6 +105,7 @@ public class JsonHandle {
 
 		writeFile.close();
 	}	
+	@SuppressWarnings("unchecked")
 	public Supplies carregaJsonSupplies() throws IOException, ParseException {
 
 		JSONObject jsonObject;

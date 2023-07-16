@@ -108,18 +108,19 @@ public class Mx910 extends Printer implements Runnable{
 		//this.setEstatisticasPrinter910();
 	}
 
-	public void setEstatisticasPrinterMX910()  throws NumberFormatException, IOException{
+	public void setEstatisticasPrinterMX910() {
 
 		URL url;
 		HttpURLConnection conn = null;
-
+		try {
+			
+		
 		url = new URL(this.getUrl() + "/cgi-bin/dynamic/printer/config/reports/devicestatistics.html");
 
 		conn = (HttpURLConnection) url.openConnection();			
 		conn.setReadTimeout(5000); conn.setConnectTimeout(5000);
 
-		if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399)
-		{
+		if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 399) {
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			String inputLine;
@@ -130,7 +131,12 @@ public class Mx910 extends Printer implements Runnable{
 				}
 			} 
 		}
-		conn.disconnect();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			conn.disconnect();
+		}
+		
 
 	}
 }
