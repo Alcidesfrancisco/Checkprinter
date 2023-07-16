@@ -3,7 +3,6 @@ package checkPrinter.business;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -11,8 +10,6 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import checkPrinter.util.JsonHandle;
 
 public class Mx622 extends Printer implements Runnable{
 
@@ -90,8 +87,7 @@ public class Mx622 extends Printer implements Runnable{
 			this.setCssName("list-group-item list-group-item-success");
 			
 			if(this.getStatus() != null) this.setStatus("Online");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 	}

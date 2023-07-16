@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 
 import org.json.simple.parser.ParseException;
 
@@ -27,7 +27,7 @@ import checkPrinter.util.DateConverter;
 import checkPrinter.util.EnviarZap;
 import checkPrinter.util.JsonHandle;
 
-@ManagedBean
+@ViewScoped
 public class Index {
 
 	private List<Printer> printers;
@@ -166,7 +166,6 @@ public class Index {
 				System.out.println("Erro no Index");
 				e.printStackTrace();
 			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {

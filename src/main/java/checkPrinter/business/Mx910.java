@@ -4,13 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
 public class Mx910 extends Printer implements Runnable{
 

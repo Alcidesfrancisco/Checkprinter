@@ -28,7 +28,6 @@ public class DateConverter {
 		return formato.parse(hoje.getDate() + "/"+ (hoje.getMonth() +1) +"/"+ (hoje.getYear()+1900)); 
 	}
 	
-
 	public static void main(String[] args) throws ParseException {
 
 		System.out.println(getHoje());

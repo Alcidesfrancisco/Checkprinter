@@ -1,15 +1,10 @@
 package checkPrinter.util;
 
-import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.NewCookie;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.WebResource;
 
 import checkPrinter.business.Printer;

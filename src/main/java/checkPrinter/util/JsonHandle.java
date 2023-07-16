@@ -9,22 +9,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.internal.StringMap;
 import com.google.gson.reflect.TypeToken;
 
 import checkPrinter.business.Cx725;
@@ -33,7 +26,6 @@ import checkPrinter.business.Mx910;
 import checkPrinter.business.Printer;
 import checkPrinter.business.Supplies;
 import checkPrinter.business.Supply;
-import javassist.expr.NewArray;
 
 public class JsonHandle {
 
@@ -55,7 +47,6 @@ public class JsonHandle {
 			//jh.EscreverJsonSupplies(supplies);
 			jh.lerJson();
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -120,7 +111,7 @@ public class JsonHandle {
 		JSONParser parser = new JSONParser();
 		jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
 		
-		ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
+		//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
 		ArrayList<Supply> listaT = new ArrayList<Supply>();
 		ArrayList<Supply> listaU = new ArrayList<Supply>();
 		ArrayList<Supply> listaK = new ArrayList<Supply>();
