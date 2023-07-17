@@ -3,30 +3,43 @@ package checkPrinter.business;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
-import checkPrinter.util.DateConverter;
 
 public class Supply {
+	private String tipo;
 	private String serial;
 	private String printer;
 	private ArrayList<Integer> consumo;
-	private ArrayList<String> dias;
-	private String ultimaData = DateConverter.dateToString(new Date());
+	private ArrayList<Date> dias;
+	private Date ultimaData =new Date();
 	
 	
 	
 	
-	public Supply(String serial, String printer, ArrayList<Integer> consumo, ArrayList<String> dias, String ultimaData) {
+	public Supply(String serial, 
+					String printer, 
+					String tipo, 
+					ArrayList<Integer> consumo, 
+					ArrayList<Date> dias, 
+					Date ultimaData) {
 		super();
 		this.serial = serial;
 		this.printer = printer;
 		this.consumo = consumo;
 		this.dias = dias;
 		this.ultimaData = ultimaData;
+		this.tipo = tipo;
 	}
-	public String getUltimaData() {
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public Date getUltimaData() {
 		return ultimaData;
-	}public void setUltimaData(String ultimaData) {
+	}public void setUltimaData(Date ultimaData) {
 		this.ultimaData = ultimaData;
 	}
 	public String getSerial() {
@@ -47,24 +60,35 @@ public class Supply {
 	public void setConsumo(ArrayList<Integer> consumo) {
 		this.consumo = consumo;
 	}
-	public List<String> getDias() {
+	public List<Date> getDias() {
 		return dias;
 	}
-	public void setDias(ArrayList<String> dias) {
+	public void setDias(ArrayList<Date> dias) {
 		this.dias = dias;
 	}
 		
 	 @Override
 	public String toString() {
 		return "Supply [serial=" + serial + ", printer=" + printer + ", consumo=" + consumo + ", dias=" + dias
-				+ ", ultimaData=" + ultimaData + "]\n";
+				+ ", ultimaData=" + ultimaData + "]" + " Tipo= "+ tipo + "\n";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(consumo, dias, printer, serial, tipo, ultimaData);
+	}
+	@Override
 	public boolean equals(Object obj) {
-	
-			return this.serial.equals(((Supply)obj).getSerial());
-	
-		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Supply other = (Supply) obj;
+		System.out.println(serial +"--------"+ other.serial);
+		return Objects.equals(serial, other.serial);
 	}
+
 	
 
 }

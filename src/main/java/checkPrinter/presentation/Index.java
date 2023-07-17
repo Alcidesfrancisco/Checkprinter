@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.view.ViewScoped;
 
 import org.json.simple.parser.ParseException;
 
@@ -21,7 +20,6 @@ import checkPrinter.business.Mx622;
 import checkPrinter.business.Mx910;
 import checkPrinter.business.Ocorrencia;
 import checkPrinter.business.Printer;
-import checkPrinter.business.Supplies;
 import checkPrinter.business.Supply;
 import checkPrinter.util.DateConverter;
 import checkPrinter.util.EnviarZap;
@@ -35,7 +33,7 @@ public class Index {
 	private String arquivoJson = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.json";
 	private String arquivoTxt = System.getProperty("user.dir") + "\\src\\main\\webapp\\printers.txt";
 	private JsonHandle jh = new JsonHandle();
-	private Supplies supplies;
+	private ArrayList<Supply> supplies;
 
 	public List<Printer> getPrinters() {
 		return printers;
@@ -119,37 +117,68 @@ public class Index {
 					} else {
 						if (printer.getModelo().contains("MX622")) {
 							System.out.println("Antes da adição " + supplies);
-							System.out.println(supplies.getToners().size());
-							supplies.addToner(
-									new Supply(printer.getSerialToner(), printer.getSerial(), new ArrayList<Integer>() {
+							System.out.println(supplies.size());
+							Supply toner = new Supply(printer.getSerialToner(), printer.getSerial(), "toner",new ArrayList<Integer>() {
 										{
 											add(printer.getNivelToner());
 										}
-									}, new ArrayList<String>() {
+									}, new ArrayList<Date>() {
 										{
-											add(DateConverter.dateToString(DateConverter.getHoje()));
+											add(DateConverter.getHoje());
 										}
-									}, DateConverter.dateToString(DateConverter.getHoje())));
-							supplies.addUnidade(new Supply(printer.getSerialUnidade(), printer.getSerial(),
+									}, DateConverter.getHoje());
+							Supply unidade = new Supply(printer.getSerialUnidade(), printer.getSerial(), "unidade",
 									new ArrayList<Integer>() {
 										{
-											add(printer.getNivelToner());
+											add(printer.getNivelUnidade());
 										}
-									}, new ArrayList<String>() {
+									}, new ArrayList<Date>() {
 										{
-											add(DateConverter.dateToString(DateConverter.getHoje()));
+											add(DateConverter.getHoje());
 										}
-									}, DateConverter.dateToString(DateConverter.getHoje())));
-							supplies.addKit(
-									new Supply(printer.getSerialKit(), printer.getSerial(), new ArrayList<Integer>() {
+									}, DateConverter.getHoje());
+							Supply kit = new Supply(printer.getSerialKit(), printer.getSerial(), "kit",
+									new ArrayList<Integer>() {
 										{
-											add(printer.getNivelToner());
+											add(printer.getNivelKit());
 										}
-									}, new ArrayList<String>() {
+									}, new ArrayList<Date>() {
 										{
-											add(DateConverter.dateToString(DateConverter.getHoje()));
+											add(DateConverter.getHoje());
 										}
-									}, DateConverter.dateToString(DateConverter.getHoje())));
+									}, DateConverter.getHoje());
+
+									
+
+							// Insere ou nao no array de Supplies
+							//TODO: Verificar se a data da atualização é maior que do objeto, se for, atualize
+							if(!supplies.contains(toner)){  
+								supplies.add(toner);
+							}else{
+								Supply item = supplies.get(supplies.indexOf(toner));
+								item.getConsumo().add(printer.getNivelToner());
+								item.getDias().add(DateConverter.getHoje());
+								item.setUltimaData(DateConverter.getHoje());
+								System.out.println(item);
+							}
+							if(!supplies.contains(unidade)){ 
+								supplies.add(unidade);
+							}else{
+								Supply item = supplies.get(supplies.indexOf(unidade));
+								item.getConsumo().add(printer.getNivelUnidade());
+								item.getDias().add(DateConverter.getHoje());
+								item.setUltimaData(DateConverter.getHoje());
+								System.out.println(item);
+							}
+							if(!supplies.contains(kit)){ 
+								supplies.add(kit);
+							}else{
+								Supply item = supplies.get(supplies.indexOf(kit));
+								item.getConsumo().add(printer.getNivelKit());
+								item.getDias().add(DateConverter.getHoje());
+								item.setUltimaData(DateConverter.getHoje());
+								System.out.println(item);
+							}
 						}
 					}
 				}
@@ -157,9 +186,9 @@ public class Index {
 				jh.EscreverJsonPrinters(printers);
 				jh.EscreverJsonSupplies(supplies);
 				System.out.println("Depois da adição " + supplies);
-				System.out.println(supplies.getToners().size());
-				System.out.println(supplies.getToners().size());
-				supplies = new Supplies();
+				System.out.println(supplies.size());
+				System.out.println(supplies.size());
+				
 			} catch (IOException | ParseException e) {
 				e.printStackTrace();
 				System.out.println("LoadFile()1");
@@ -241,7 +270,7 @@ public class Index {
 			}
 			JsonHandle jh = new JsonHandle();
 			jh.EscreverJsonPrinters(printers);
-			jh.EscreverJsonSupplies(new Supplies());
+			jh.EscreverJsonSupplies(new ArrayList<Supply>());
 		} catch (IOException | InterruptedException e) {
 			erros.add(e.toString());
 			e.printStackTrace();

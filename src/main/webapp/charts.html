@@ -17,15 +17,31 @@
 				let kit = [];
 				const urlParams = new URLSearchParams(window.location.search);
 				const serial = urlParams.get("printer");
-				//const serial =  'CAB220392B04'; //teste stand-alone
+				//const serial =  '7018840002TB3'; //teste stand-alone
 				const res = await fetch("logSupplies.json");
 				const data = await res.json();
 				//console.log(data.Toners);
 				//console.log(data.Toners.length);
+				var t = [];
+				var u = [];
+				var k = [];
 				
-				let t = data.toners;
-				let u = data.unidades;
-				let k = data.kits;
+				data.forEach(suplly => {
+					switch(suplly.tipo){
+						case 'toner':
+							t.push(suplly);
+							break;
+						case 'unidade':
+							u.push(suplly);
+							break;
+						case 'kit':
+							k.push(suplly);
+							break;
+						default:
+							break;
+					}
+				});
+				console.log(t);
 				for(let i = 0; i < t.length; i = i + 1){
 					
 					if(t[i].printer === serial){
@@ -35,7 +51,7 @@
 						kit = k[i].consumo;
 					}
 				}
-			
+			console.log(t);
 		//const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
 		
 		new Chart("myChart", {
@@ -43,12 +59,7 @@
 		 
 		  data: {
 		    labels: xValues,
-		    datasets: [{ 
-		      data: toner,
-		      borderColor: "blue",
-		      fill: false,
-		      label: "Toner"
-		    },
+		    datasets: [
 		    { 
 		      data: unidade,
 		      borderColor: "red",

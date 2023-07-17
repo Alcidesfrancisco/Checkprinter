@@ -12,12 +12,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import checkPrinter.business.Cx725;
@@ -45,7 +48,7 @@ public class JsonHandle {
 			//Supplies supplies = jh.carregaJsonSupplies();
 			//System.out.println(supplies.getToners().get(0));
 			//jh.EscreverJsonSupplies(supplies);
-			jh.lerJson();
+			jh.carregaJsonSupplies();
 		} catch (IOException | ParseException e) {
 			e.printStackTrace();
 		}
@@ -70,29 +73,29 @@ public class JsonHandle {
 
 	}
 	@SuppressWarnings("unchecked")
-	public void lerJson() throws FileNotFoundException, IOException, ParseException {
+	// public void lerJson() throws FileNotFoundException, IOException, ParseException {
 		
-		JSONObject jsonObject;
-		//Cria o parse de tratamento
-		JSONParser parser = new JSONParser();
-		jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
+	// 	JSONObject jsonObject;
+	// 	//Cria o parse de tratamento
+	// 	JSONParser parser = new JSONParser();
+	// 	jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
 		
-		//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
-		ArrayList<Supply> listaT = new ArrayList<Supply>();
-		ArrayList<Supply> listaU = new ArrayList<Supply>();
-		ArrayList<Supply> listaK = new ArrayList<Supply>();
-		for (JSONObject t : (ArrayList<JSONObject>) jsonObject.get("toners")) {
-			listaT.add(new Supply((String)t.get("serial"), (String)t.get("printer"), (ArrayList<Integer>)t.get("consumo"), (ArrayList<String>)t.get("dias"), (String)t.get("ultimaData")));
-		}
-		for (JSONObject u : (ArrayList<JSONObject>) jsonObject.get("unidades")) {
-			listaT.add(new Supply((String)u.get("serial"), (String)u.get("printer"), (ArrayList<Integer>)u.get("consumo"), (ArrayList<String>)u.get("dias"), (String)u.get("ultimaData")));
-		}
-		for (JSONObject k : (ArrayList<JSONObject>) jsonObject.get("kits")) {
-			listaT.add(new Supply((String)k.get("serial"), (String)k.get("printer"), (ArrayList<Integer>)k.get("consumo"), (ArrayList<String>)k.get("dias"), (String)k.get("ultimaData")));
-		}
-		Supplies supplies = new Supplies(listaT, listaU, listaK);
-		System.out.println(supplies);
-	}
+	// 	//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
+	// 	ArrayList<Supply> listaT = new ArrayList<Supply>();
+	// 	ArrayList<Supply> listaU = new ArrayList<Supply>();
+	// 	ArrayList<Supply> listaK = new ArrayList<Supply>();
+	// 	for (JSONObject t : (ArrayList<JSONObject>) jsonObject.get("toners")) {
+	// 		listaT.add(new Supply((String)t.get("serial"), (String)t.get("printer"), (ArrayList<Integer>)t.get("consumo"), (ArrayList<String>)t.get("dias"), (String)t.get("ultimaData")));
+	// 	}
+	// 	for (JSONObject u : (ArrayList<JSONObject>) jsonObject.get("unidades")) {
+	// 		listaT.add(new Supply((String)u.get("serial"), (String)u.get("printer"), (ArrayList<Integer>)u.get("consumo"), (ArrayList<String>)u.get("dias"), (String)u.get("ultimaData")));
+	// 	}
+	// 	for (JSONObject k : (ArrayList<JSONObject>) jsonObject.get("kits")) {
+	// 		listaT.add(new Supply((String)k.get("serial"), (String)k.get("printer"), (ArrayList<Integer>)k.get("consumo"), (ArrayList<String>)k.get("dias"), (String)k.get("ultimaData")));
+	// 	}
+	// 	Supplies supplies = new Supplies(listaT, listaU, listaK);
+	// 	System.out.println(supplies);
+	// }
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
 	
@@ -106,38 +109,39 @@ public class JsonHandle {
 		writeFile.close();
 	}	
 	@SuppressWarnings("unchecked")
-	public Supplies carregaJsonSupplies() throws IOException, ParseException {
+	public ArrayList<Supply> carregaJsonSupplies() throws IOException, ParseException {
 
-		JSONObject jsonObject;
+		JSONArray jsonArray;
+		Gson gson = new Gson();
 		//Cria o parse de tratamento
-		JSONParser parser = new JSONParser();
-		jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
 		
-		//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
-		ArrayList<Supply> listaT = new ArrayList<Supply>();
-		ArrayList<Supply> listaU = new ArrayList<Supply>();
-		ArrayList<Supply> listaK = new ArrayList<Supply>();
-		for (JSONObject t : (ArrayList<JSONObject>) jsonObject.get("toners")) {
-			listaT.add(new Supply((String)t.get("serial"), (String)t.get("printer"), (ArrayList<Integer>)t.get("consumo"), (ArrayList<String>)t.get("dias"), (String)t.get("ultimaData")));
+		ArrayList<Supply> supplies = new ArrayList<Supply>();
+		JSONParser parser = new JSONParser();
+		File file = new File(ARQUIVO_SUPPLIES_JSON);
+		FileReader fileReader;
+		if(file.exists()){
+			fileReader = new FileReader(ARQUIVO_SUPPLIES_JSON);
+			jsonArray = (JSONArray) parser.parse(fileReader);
+		}else{
+			return supplies;
 		}
-		for (JSONObject u : (ArrayList<JSONObject>) jsonObject.get("unidades")) {
-			listaT.add(new Supply((String)u.get("serial"), (String)u.get("printer"), (ArrayList<Integer>)u.get("consumo"), (ArrayList<String>)u.get("dias"), (String)u.get("ultimaData")));
-		}
-		for (JSONObject k : (ArrayList<JSONObject>) jsonObject.get("kits")) {
-			listaT.add(new Supply((String)k.get("serial"), (String)k.get("printer"), (ArrayList<Integer>)k.get("consumo"), (ArrayList<String>)k.get("dias"), (String)k.get("ultimaData")));
-		}
-		return new Supplies(listaT, listaU, listaK);
+		TypeToken<ArrayList<Supply>> tt = new TypeToken<ArrayList<Supply>>() {};
+		JsonElement je = gson.toJsonTree(jsonArray.toJSONString());
+		supplies = gson.fromJson(je.getAsString(), tt.getType());
+		
+		fileReader.close();
+		return supplies;
 		
 
 	}
-	public void EscreverJsonSupplies(Supplies supplies) throws IOException {
+	public void EscreverJsonSupplies(ArrayList<Supply> supplies) throws IOException {
 		
-		FileWriter writeFile = new FileWriter(ARQUIVO_SUPPLIES_JSON);
+		FileWriter writeFile = new FileWriter(ARQUIVO_SUPPLIES_JSON, false);
 		Gson gson = new Gson();
 
 		//HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
 		//map.put("Printers", printers);
-		writeFile.write(gson.toJson( supplies));
+		writeFile.write(gson.toJson(supplies));
 
 		writeFile.close();
 	}	
