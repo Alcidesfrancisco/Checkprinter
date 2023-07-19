@@ -22,64 +22,65 @@
 				const data = await res.json();
 				//console.log(data.Toners);
 				//console.log(data.Toners.length);
-				var t = [];
-				var u = [];
-				var k = [];
+				var t ;
+				var u ;
+				var k ;
 				
 				data.forEach(suplly => {
-					switch(suplly.tipo){
-						case 'toner':
-							t.push(suplly);
-							break;
-						case 'unidade':
-							u.push(suplly);
-							break;
-						case 'kit':
-							k.push(suplly);
-							break;
-						default:
-							break;
+					if((suplly.printer === serial)){
+						switch(suplly.tipo){
+							case 'toner':
+								t = suplly;
+								break;
+							case 'unidade':
+								u = suplly;
+								break;
+							case 'kit':
+								k = suplly;
+								break;
+							default:
+								break;
+						}
 					}
 				});
-				console.log(t);
-				for(let i = 0; i < t.length; i = i + 1){
-					
-					if(t[i].printer === serial){
-						xValues = t[i].dias;
-						toner = t[i].consumo;						
-						unidade = u[i].consumo;						
-						kit = k[i].consumo;
-					}
+				
+				xValues = t.dias;
+				toner = t.consumo;						
+				unidade = u.consumo;						
+				kit = k.consumo;
+
+				
+			new Chart("myChart", {
+			type: "line",
+			
+			data: {
+				labels: xValues,
+				datasets: [ { 
+				data: toner,
+				borderColor: "Blue",
+				fill: false,
+				label: "Toner"
+				},
+				{ 
+				data: unidade,
+				borderColor: "red",
+				fill: false,
+				label: "Unidade"
+				},
+				{ 
+				data: kit,
+				borderColor: "green",
+				fill: false,
+				label: "Kit"
 				}
-			console.log(t);
-		//const xValues = ['01/06','02/06','03/06','04/06','05/06','06/06','07/06','08/06','09/06','10/06'];
-		
-		new Chart("myChart", {
-		  type: "line",
-		 
-		  data: {
-		    labels: xValues,
-		    datasets: [
-		    { 
-		      data: unidade,
-		      borderColor: "red",
-		      fill: false,
-		      label: "Unidade"
+				]
 			},
-			{ 
-		      data: kit,
-		      borderColor: "green",
-		      fill: false,
-		      label: "Kit"
+			options: {
+				legend: {position: 'top'},
+				
 			}
-		    ]
-		  },
-		  options: {
-		    legend: {position: 'top'},
-			   
-		  }
-		});
-		}
+			});
+			}
 		getJson();
 		</script>
 		
