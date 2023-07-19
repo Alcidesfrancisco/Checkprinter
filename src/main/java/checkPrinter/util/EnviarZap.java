@@ -42,8 +42,7 @@ public class EnviarZap {
 	public String enviaPrinter(Printer printer) {
 
 		
-		WebResource wr = c.resource(
-				"http://localhost:8000/zap-bot-printer");
+		WebResource wr = c.resource("http://localhost:8000/zap-bot-printer");
 		
 		try {
 			//System.out.println(gson.toJson(mensagem));
