@@ -181,7 +181,7 @@ public class Index {
 				item.getConsumo().add(printer.getNivelToner());
 				item.getDias().add(DateConverter.getHoje());
 				item.setUltimaData(DateConverter.getHoje());
-				System.out.println(item);
+				
 			}
 			if(!supplies.contains(unidade)){ 
 				supplies.add(unidade);
@@ -190,7 +190,7 @@ public class Index {
 				item.getConsumo().add(printer.getNivelUnidade());
 				item.getDias().add(DateConverter.getHoje());
 				item.setUltimaData(DateConverter.getHoje());
-				System.out.println(item);
+				
 			}
 			if(!supplies.contains(kit)){ 
 				supplies.add(kit);
@@ -199,7 +199,7 @@ public class Index {
 				item.getConsumo().add(printer.getNivelKit());
 				item.getDias().add(DateConverter.getHoje());
 				item.setUltimaData(DateConverter.getHoje());
-				System.out.println(item);
+				
 			}
 		}
 	}

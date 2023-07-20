@@ -85,7 +85,7 @@ public class Supply {
 		if (getClass() != obj.getClass())
 			return false;
 		Supply other = (Supply) obj;
-		System.out.println(serial +"--------"+ other.serial);
+		
 		return Objects.equals(serial, other.serial);
 	}
 
