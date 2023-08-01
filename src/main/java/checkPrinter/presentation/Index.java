@@ -56,8 +56,9 @@ public class Index {
 		if (new File(arquivoJson).exists()) {
 
 			try {
-				supplies = jh.carregaJsonSupplies();
+				
 				List<Printer> printersTemp = jh.carregaJsonPrinters();
+				supplies = jh.carregaJsonSupplies();
 				if (printersTemp.size() == 0)
 					throw new IOException();
 

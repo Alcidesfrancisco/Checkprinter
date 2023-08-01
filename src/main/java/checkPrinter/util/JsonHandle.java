@@ -4,7 +4,6 @@ package checkPrinter.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,20 +13,17 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import checkPrinter.business.Cx725;
 import checkPrinter.business.Mx622;
 import checkPrinter.business.Mx910;
 import checkPrinter.business.Printer;
-import checkPrinter.business.Supplies;
 import checkPrinter.business.Supply;
 
 public class JsonHandle {
@@ -72,30 +68,6 @@ public class JsonHandle {
 		return listPrinters.get("Printers");
 
 	}
-	@SuppressWarnings("unchecked")
-	// public void lerJson() throws FileNotFoundException, IOException, ParseException {
-		
-	// 	JSONObject jsonObject;
-	// 	//Cria o parse de tratamento
-	// 	JSONParser parser = new JSONParser();
-	// 	jsonObject = (JSONObject) parser.parse(new FileReader(ARQUIVO_SUPPLIES_JSON));
-		
-	// 	//ArrayList<JSONObject> toners = (ArrayList<JSONObject>) jsonObject.get("toners");
-	// 	ArrayList<Supply> listaT = new ArrayList<Supply>();
-	// 	ArrayList<Supply> listaU = new ArrayList<Supply>();
-	// 	ArrayList<Supply> listaK = new ArrayList<Supply>();
-	// 	for (JSONObject t : (ArrayList<JSONObject>) jsonObject.get("toners")) {
-	// 		listaT.add(new Supply((String)t.get("serial"), (String)t.get("printer"), (ArrayList<Integer>)t.get("consumo"), (ArrayList<String>)t.get("dias"), (String)t.get("ultimaData")));
-	// 	}
-	// 	for (JSONObject u : (ArrayList<JSONObject>) jsonObject.get("unidades")) {
-	// 		listaT.add(new Supply((String)u.get("serial"), (String)u.get("printer"), (ArrayList<Integer>)u.get("consumo"), (ArrayList<String>)u.get("dias"), (String)u.get("ultimaData")));
-	// 	}
-	// 	for (JSONObject k : (ArrayList<JSONObject>) jsonObject.get("kits")) {
-	// 		listaT.add(new Supply((String)k.get("serial"), (String)k.get("printer"), (ArrayList<Integer>)k.get("consumo"), (ArrayList<String>)k.get("dias"), (String)k.get("ultimaData")));
-	// 	}
-	// 	Supplies supplies = new Supplies(listaT, listaU, listaK);
-	// 	System.out.println(supplies);
-	// }
 
 	public void EscreverJsonPrinters(List<Printer> printers) throws IOException {
 	
@@ -113,7 +85,6 @@ public class JsonHandle {
 
 		JSONArray jsonArray;
 		Gson gson = new Gson();
-		//Cria o parse de tratamento
 		
 		ArrayList<Supply> supplies = new ArrayList<Supply>();
 		JSONParser parser = new JSONParser();
@@ -139,8 +110,6 @@ public class JsonHandle {
 		FileWriter writeFile = new FileWriter(ARQUIVO_SUPPLIES_JSON, false);
 		Gson gson = new Gson();
 
-		//HashMap<String, List<Printer>> map = new HashMap<String, List<Printer>>();
-		//map.put("Printers", printers);
 		writeFile.write(gson.toJson(supplies));
 
 		writeFile.close();
@@ -170,10 +139,9 @@ public class JsonHandle {
 		List<Printer> printers = new ArrayList<Printer>(); 
 		try {
 
-			File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //
-			//para Server
+			File file = new File("/opt/tomcat/webapps/CheckPrinter/printers.txt"); //para Server
 
-			if(!file.exists()) { file = new File(ARQUIVO_TXT_PRINTERS_JSON); //para localHost }
+			if(!file.exists()) { file = new File(ARQUIVO_TXT_PRINTERS_JSON); //para localHost
 
 			InputStreamReader fileReader = new InputStreamReader(new FileInputStream(file.getPath()), "utf-8"); 
 			BufferedReader reader = new BufferedReader(fileReader); String dados = null;
@@ -194,7 +162,6 @@ public class JsonHandle {
 			fileReader.close(); reader.close();
 
 			} 
-
 		}catch (Exception e) {
 			System.out.println("Erro ao carregar TXT");
 		}
